@@ -1,0 +1,42 @@
+@import './colors.scss';
+
+:root {
+  --color-page-background: #{$bg-grey};
+  --color-text: #{$black};
+  --sidebar-bg-color: #{$white-sidebar-bg};
+  --footer-bg-color: #{$white-footer-bg};
+  --logo-color: #{$black};
+}
+
+.dark {
+  --color-page-background: #{$black};
+  --color-text: #{$bg-grey};
+  --sidebar-bg-color: #{$dark-sidebar-bg};
+  --footer-bg-color: #{$dark-footer-bg};
+  --logo-color: #{$white};
+}
+
+body {
+  background-color: var(--color-page-background);
+  color: var(--color-text);
+}
+
+aside {
+  background-color: var(--sidebar-bg-color);
+}
+
+.footer {
+  background-color: var(--footer-bg-color);
+}
+
+.logo {
+  fill: var(--logo-color);
+}
+
+h1 {
+  color: var(--color-text);
+}
+
+a {
+  color: var(--color-text);
+}

@@ -11,3 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~shards-ui/dist/css/shards.min.css';
+@import './assets/scss/theme.scss';

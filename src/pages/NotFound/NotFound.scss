@@ -1,0 +1,21 @@
+.drawing {
+  height: inherit;
+  width: inherit;
+
+  svg {
+    height: inherit;
+    width: inherit;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .drawing {
+    height: 100vw;
+    width: 100vw;
+  }
+
+  a.btn {
+    width: 100%;
+    display: block;
+  }
+}

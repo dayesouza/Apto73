@@ -1,2 +1,4 @@
-export const BEGGIN_API_CALL = "BEGGIN_API_CALL";
-export const API_CALL_ERROR = "API_CALL_ERROR";
+export const BEGGIN_API_CALL = 'BEGGIN_API_CALL';
+export const API_CALL_ERROR = 'API_CALL_ERROR';
+
+export const TOGGLE_MENU_VISIBLE = 'TOGGLE_MENU_VISIBLE';

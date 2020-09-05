@@ -1,4 +1,5 @@
 export default {
   waterGallons: [],
-  apiCallsInProgess: 0
+  menuVisible: 0,
+  apiCallsInProgess: 0,
 };

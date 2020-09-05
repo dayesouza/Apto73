@@ -1,4 +1,4 @@
-import * as types from "./actionTypes";
+import * as types from './actionTypes';
 
 export function beginApiCall() {
   return { type: types.BEGGIN_API_CALL };

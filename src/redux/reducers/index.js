@@ -1,8 +1,10 @@
-import { combineReducers } from "redux";
-import apiCallsInProgress from "./apiStatusReducer";
+import { combineReducers } from 'redux';
+import apiCallsInProgress from './apiStatusReducer';
+import menuVisible from './menuVisibleReducer';
 
 const rootReducer = combineReducers({
-  apiCallsInProgress
+  apiCallsInProgress,
+  menuVisible,
 });
 
 export default rootReducer;
