@@ -6,6 +6,7 @@
   --sidebar-bg-color: #{$white-sidebar-bg};
   --footer-bg-color: #{$white-footer-bg};
   --logo-color: #{$black};
+  --navbar-bg-color: #{$white-sidebar-bg};
 }
 
 .dark {
@@ -14,6 +15,7 @@
   --sidebar-bg-color: #{$dark-sidebar-bg};
   --footer-bg-color: #{$dark-footer-bg};
   --logo-color: #{$white};
+  --navbar-bg-color: #{blue};
 }
 
 body {
@@ -38,5 +40,14 @@ h1 {
 }
 
 a {
+  color: var(--color-text);
+}
+
+span.app-name {
+  color: var(--color-text);
+}
+
+.main-navbar {
+  background-color: var(--navbar-bg-color);
   color: var(--color-text);
 }
