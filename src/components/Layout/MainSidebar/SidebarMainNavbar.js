@@ -4,7 +4,7 @@ import NavbarToggle from '../MainNavbar/NavbarToggle';
 
 function SidebarMainNavbar() {
   return (
-    <div className="main-navbar">
+    <div className="sidebarMain__navbar">
       <Navbar className="align-items-stretch bg-white flex-md-nowrap border-bottom p-0">
         <NavbarToggle icon="angle-double-left" />
       </Navbar>

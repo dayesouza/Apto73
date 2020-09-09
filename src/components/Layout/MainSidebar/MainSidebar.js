@@ -4,23 +4,21 @@ import { Col } from 'shards-react';
 import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import SidebarMainNavbar from './SidebarMainNavbar';
 import SidebarNavItems from './SidebarNavItems';
 import './MainSidebar.scss';
+import Rule from '../../Rule/Rule';
 
 function MainSidebar({ menuVisible }) {
+  const classes = classNames('mainSidebar', 'vh-100', 'col-12', {
+    'mainSidebar--open': menuVisible,
+  });
+
   return (
-    <Col
-      tag="aside"
-      className={
-        menuVisible
-          ? 'main-sidebar open vh-100 col-12'
-          : 'main-sidebar vh-100 col-12'
-      }
-      lg={2}
-      md={3}
-    >
+    <Col tag="aside" className={classes} lg={2} md={3}>
       <SidebarMainNavbar />
+      <Rule />
       <SidebarNavItems />
     </Col>
   );

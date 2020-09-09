@@ -12,7 +12,7 @@ const DefaultLayout = ({ children }) => (
     <Row>
       <MainSidebar />
       <Col
-        className="main-content p-0"
+        className="mainContent p-0"
         lg={{ size: 10, offset: 2 }}
         md={{ size: 9, offset: 3 }}
         sm="12"

@@ -43,11 +43,19 @@ a {
   color: var(--color-text);
 }
 
-span.app-name {
+.mainNavbar__appName {
   color: var(--color-text);
 }
 
-.main-navbar {
+.mainNavbar {
   background-color: var(--navbar-bg-color);
   color: var(--color-text);
+}
+
+.sidebarMain__navItem--selected {
+  border: 1px solid black;
+}
+
+.rule {
+  border-top: 1px solid var(--color-text);
 }

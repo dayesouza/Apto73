@@ -15,7 +15,7 @@ function NavbarToggle({ toggleMenu, menuVisible, icon }) {
       <button
         type="button"
         onClick={handleClick}
-        className="nav-link btn btn-link nav-link-icon toggle-sidebar d-sm-inline d-md-inline d-lg-none"
+        className="nav-link btn btn-link nav-link-icon d-sm-inline d-md-inline d-lg-none"
       >
         <FontAwesomeIcon icon={icon} />
       </button>
@@ -24,9 +24,13 @@ function NavbarToggle({ toggleMenu, menuVisible, icon }) {
 }
 
 NavbarToggle.propTypes = {
-  menuVisible: PropTypes.bool.isRequired,
+  menuVisible: PropTypes.bool,
   toggleMenu: PropTypes.func.isRequired,
   icon: PropTypes.string.isRequired,
+};
+
+NavbarToggle.defaultProps = {
+  menuVisible: false,
 };
 
 function mapStateToProps(state) {
