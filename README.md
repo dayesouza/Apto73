@@ -8,6 +8,8 @@ For now we have a initial screen with the weather for my City, Curitiba and the 
 
 The Front-end is made with react, Redux, bootstrap and shard-react.
 
+The Authentication is with Azure AD;
+
 The back-end is in the folder `server` and it`s done with Node.JS, express and MongoDB;
 
 Status do Projeto: Em desenvolvimento :warning:

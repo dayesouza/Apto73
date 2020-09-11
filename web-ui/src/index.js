@@ -9,29 +9,35 @@ import configureStore from './redux/configureStore';
 import routes from './routes';
 import DefaultLayout from './components/Layout/Default/Default';
 
+import { AzureAD } from 'react-aad-msal';
+
+import { authProvider } from './auth/authProvider';
+
 const store = configureStore();
 render(
   <Provider store={store}>
-    <Router>
-      <div>
-        <Switch>
-          {routes.map((route, index) => (
-            <Route
-              /* eslint-disable-next-line react/no-array-index-key */
-              key={index}
-              path={route.path}
-              exact={route.exact}
-              component={(props) => (
-                <DefaultLayout>
-                  {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-                  <route.component {...props} />
-                </DefaultLayout>
-              )}
-            />
-          ))}
-        </Switch>
-      </div>
-    </Router>
+    <AzureAD provider={authProvider} reduxStore={store} forceLogin={true}>
+      <Router>
+        <div>
+          <Switch>
+            {routes.map((route, index) => (
+              <Route
+                /* eslint-disable-next-line react/no-array-index-key */
+                key={index}
+                path={route.path}
+                exact={route.exact}
+                component={(props) => (
+                  <DefaultLayout>
+                    {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+                    <route.component {...props} />
+                  </DefaultLayout>
+                )}
+              />
+            ))}
+          </Switch>
+        </div>
+      </Router>
+    </AzureAD>
   </Provider>,
   document.getElementById('root')
 );
