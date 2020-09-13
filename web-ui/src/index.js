@@ -4,19 +4,18 @@ import './index.scss';
 import './components/icon-library';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { AzureAD } from 'react-aad-msal';
 import * as serviceWorker from './serviceWorker';
 import configureStore from './redux/configureStore';
 import routes from './routes';
 import DefaultLayout from './components/Layout/Default/Default';
 
-import { AzureAD } from 'react-aad-msal';
-
-import { authProvider } from './auth/authProvider';
+import authProvider from './auth/authProvider';
 
 const store = configureStore();
 render(
   <Provider store={store}>
-    <AzureAD provider={authProvider} reduxStore={store} forceLogin={true}>
+    <AzureAD provider={authProvider} reduxStore={store} forceLogin>
       <Router>
         <div>
           <Switch>

@@ -2,8 +2,7 @@ import { MsalAuthProvider, LoginType } from 'react-aad-msal';
 
 const config = {
   auth: {
-    authority:
-      'https://login.microsoftonline.com/' + process.env.REACT_APP_AZURE_TENANT,
+    authority: `https://login.microsoftonline.com/${process.env.REACT_APP_AZURE_TENANT}`,
     clientId: process.env.REACT_APP_AZURE_CLIENT,
     redirectUri: process.env.REACT_APP_CURRENT_URI,
   },
@@ -15,7 +14,9 @@ const config = {
 
 const options = {
   loginType: LoginType.Redirect,
-  tokenRefreshUri: window.location.origin + '/auth.html',
+  tokenRefreshUri: `${window.location.origin}/auth.html`,
 };
 
-export const authProvider = new MsalAuthProvider(config, options);
+const authProvider = new MsalAuthProvider(config, options);
+
+export { authProvider as default };
