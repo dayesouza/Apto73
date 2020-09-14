@@ -8,6 +8,7 @@ import {
   faBars,
   faAngleDoubleLeft,
   faGlobe,
+  faTint,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -17,7 +18,8 @@ library.add(
   faTachometerAlt,
   faBars,
   faAngleDoubleLeft,
-  faGlobe
+  faGlobe,
+  faTint
 );
 
 /*

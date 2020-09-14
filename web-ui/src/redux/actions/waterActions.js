@@ -1,3 +1,4 @@
+/*eslint-disable no-underscore-dangle */
 import * as types from './actionTypes';
 import waterService from '../../api/waterService';
 import { beginApiCall, apiCallError } from './apiStatusActions';

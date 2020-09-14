@@ -7,15 +7,19 @@
   --footer-bg-color: #{$white-footer-bg};
   --logo-color: #{$black};
   --navbar-bg-color: #{$white-sidebar-bg};
+  --primary: #{$primary-green};
+  --card-color: #{$white};
 }
 
 .dark {
   --color-page-background: #{$black};
   --color-text: #{$bg-grey};
-  --sidebar-bg-color: #{$dark-sidebar-bg};
+  --sidebar-bg-color: #{$primary-green};
   --footer-bg-color: #{$dark-footer-bg};
   --logo-color: #{$white};
-  --navbar-bg-color: #{blue};
+  --navbar-bg-color: #{$primary-green};
+  --primary: #{$primary-green};
+  --card-color: #{$dark-grey};
 }
 
 body {
@@ -35,7 +39,12 @@ aside {
   fill: var(--logo-color);
 }
 
-h1 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--color-text);
 }
 
@@ -58,4 +67,10 @@ a {
 
 .rule {
   border-top: 1px solid var(--color-text);
+}
+
+.waterCard,
+.waterCard h5 {
+  color: var(--primary);
+  background-color: var(--card-color);
 }

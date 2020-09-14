@@ -35,6 +35,8 @@ class WaterGallons extends Component {
     return (
       <div>
         <h1>Water Gallons</h1>
+
+        <h3>History</h3>
         <List waterList={this.props.water} />
       </div>
     );
