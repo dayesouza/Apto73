@@ -2,14 +2,20 @@ import React from 'react';
 
 import moment from 'moment';
 import { Card, CardBody, CardTitle } from 'shards-react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import './List.scss';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
-export default function List({ waterList }) {
+function List({ waterList, history }) {
   return (
     <div>
       {waterList.map((water) => {
         return (
-          <Card key={water._id} className="mb-2 waterCard">
+          <Card
+            key={water._id}
+            onClick={() => history.push(`/water-gallons/${water._id}`)}
+            className="mb-2 waterCard"
+          >
             <CardBody>
               <CardTitle className="d-flex justify-content-between">
                 <span>{moment(water.date).format('DD/MM/y')} </span>
@@ -23,3 +29,9 @@ export default function List({ waterList }) {
     </div>
   );
 }
+
+List.propTypes = {
+  waterList: PropTypes.array.isRequired,
+};
+
+export default withRouter(List);

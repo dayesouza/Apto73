@@ -12,6 +12,8 @@ export default function waterReducer(state = initialState.water, action) {
       return state.map((water) =>
         water._id === action.water._id ? action.water : water
       );
+    case types.GET_WATER_BY_ID_SUCCESS:
+      return state.find((s) => s._id === action.id);
     case types.DELETE_WATER_SUCCESS:
       return state.filter((water) => water._id !== action.water._id);
     default:

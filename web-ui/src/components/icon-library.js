@@ -9,6 +9,7 @@ import {
   faAngleDoubleLeft,
   faGlobe,
   faTint,
+  faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -19,7 +20,8 @@ library.add(
   faBars,
   faAngleDoubleLeft,
   faGlobe,
-  faTint
+  faTint,
+  faPlus
 );
 
 /*

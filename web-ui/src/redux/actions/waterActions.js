@@ -24,6 +24,13 @@ export function updateWaterSuccess(water) {
   };
 }
 
+export function getWaterById(id) {
+  return {
+    type: types.GET_WATER_BY_ID_SUCCESS,
+    id,
+  };
+}
+
 export function deleteWaterSuccess(water) {
   return { type: types.DELETE_WATER_SUCCESS, water };
 }

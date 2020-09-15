@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import * as waterActions from '../../redux/actions/waterActions';
 import { bindActionCreators } from 'redux';
 import List from './List/List';
+import { Button } from 'shards-react';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class WaterGallons extends Component {
   constructor(props) {
@@ -35,8 +38,17 @@ class WaterGallons extends Component {
     return (
       <div>
         <h1>Water Gallons</h1>
-
-        <h3>History</h3>
+        <div className="d-flex justify-content-between">
+          <h3>History</h3>
+          <div>
+            <Link to="water-gallons/new">
+              <Button>
+                <FontAwesomeIcon icon="plus" />
+                Add
+              </Button>
+            </Link>
+          </div>
+        </div>
         <List waterList={this.props.water} />
       </div>
     );

@@ -24,7 +24,7 @@ render(
                 /* eslint-disable-next-line react/no-array-index-key */
                 key={index}
                 path={route.path}
-                exact={route.exact}
+                exact
                 component={(props) => (
                   <DefaultLayout>
                     {/* eslint-disable-next-line react/jsx-props-no-spreading */}

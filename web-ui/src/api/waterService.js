@@ -10,10 +10,9 @@ export default class WaterService {
   static save = async (values) => {
     const method = values._id ? 'PUT' : 'POST';
     const newUrl = values._id ? url.concat(values._id) : url;
-
     return await API(newUrl, {
       method,
-      body: JSON.stringify(values),
+      data: values,
     })
       .then(handleResponse)
       .catch(handleError);
