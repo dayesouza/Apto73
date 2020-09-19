@@ -1,7 +1,7 @@
 import { handleResponse, handleError } from './apiUtils';
 import API from './API';
 
-const url = `/water-gallons`;
+const url = `/water-gallons/`;
 export default class WaterService {
   static get = async () => {
     return await API.get(url).then(handleResponse).catch(handleError);

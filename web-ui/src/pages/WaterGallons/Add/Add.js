@@ -1,66 +1,83 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from './Form';
 
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as waterActions from '../../../redux/actions/waterActions';
-import { withRouter } from 'react-router-dom';
+import { Alert } from 'shards-react';
 
-class Add extends Component {
-  state = {
-    error: null,
-  };
+function Add({ waterList, loadWaterList, saveWater, history, ...props }) {
+  const [water, setWater] = useState({ ...props.water });
+  const [errors, setErrors] = useState({});
+  const [saving, setSaving] = useState(false);
 
-  componentDidMount() {
-    const id = this.props.match.params.id;
-    //get id and pass
-    this.props.actions.getWaterById(id);
+  useEffect(() => {
+    if (waterList.length === 0) {
+      loadWaterList().catch(_ => {
+        alert("Loading water failed");
+      });
+    }
+    else {
+      setWater({ ...props.water });
+    }
 
-    debugger;
-  }
+  }, [waterList]); //will only run once when the component mounts
 
-  save = (values) => {
-    values.date = new Date();
-    this.props.actions
-      .saveWater(values)
+  function save(values) {
+    values.date = new Date(values.date);
+    saveWater(values)
       .then((_) => {
-        this.props.history.push('/water-gallons');
+        history.push('/water-gallons');
       })
       .catch((_) =>
-        this.setState({ error: 'Undefined error. Please try again later.' })
+        setErrors({ error: 'Undefined error. Please try again later.' })
       );
   };
 
-  render() {
-    return (
-      <>
-        <h1>Add new water gallon</h1>
-        <Form save={this.save} />
-      </>
-    );
-  }
+  return (
+    <>
+      <h1>Add new water gallon</h1>
+
+      {errors.length > 0 && 
+        <Alert theme="danger">
+          {errors.map(e => <p>{e}</p>)}
+        </Alert>
+      }
+      <Form save={save} water={water} />
+    </>
+  );
 }
 
 Add.propTypes = {
-  actions: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
+  waterList: PropTypes.array.isRequired,
+  loadWaterList: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  saveWater: PropTypes.func.isRequired
 };
 
-function mapStateToProps(state) {
+export function getWaterBySlug(waterList, slug) {
+  return waterList.find(water => water._id === slug || null);
+}
+
+function mapStateToProps(state, ownProps) {
+  const slug = ownProps.match.params.id;
+  const water =
+    slug && state.waterList.length > 0
+      ? getWaterBySlug(state.waterList, slug)
+      : {};
+
   return {
     loading: state.apiCallsInProgress > 0,
+    water,
+    waterList: state.waterList
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: {
-      saveWater: bindActionCreators(waterActions.saveWater, dispatch),
-      getWaterById: bindActionCreators(waterActions.getWaterById, dispatch),
-      deleteWater: bindActionCreators(waterActions.deleteWater, dispatch),
-    },
-  };
+const mapDispatchToProps = {
+  saveWater: waterActions.saveWater,
+  deleteWater: waterActions.deleteWater,
+  loadWaterList: waterActions.loadWater,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Add));
+export default connect(mapStateToProps, mapDispatchToProps)(Add);

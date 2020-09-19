@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FormInput, FormGroup, Button, FormFeedback } from 'shards-react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 
-export default function FormWater({ save }) {
-  const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (data) => save(data);
+export default function FormWater({ save, water }) {
+  const { register, handleSubmit, errors, reset } = useForm();
 
+  useEffect(() => {
+      reset(water);
+  }, [water])
+
+
+  const onSave = (data) => save(data);
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSave)}>
       <FormGroup>
+        <input
+          name="_id"
+          ref={register()}
+          id="_id"
+          type="hidden"
+        />
         <label htmlFor="date">Date</label>
         <FormInput
           name="date"

@@ -19,11 +19,11 @@ export default [
     icon: 'tachometer-alt',
   },
   {
-    path: '/water-gallons/:id',
+    path: '/water-gallon/:id',
     component: WaterAdd,
   },
   {
-    path: '/water-gallons/new',
+    path: '/water-gallon',
     component: WaterAdd,
   },
   {

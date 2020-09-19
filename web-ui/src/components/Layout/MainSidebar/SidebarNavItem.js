@@ -5,10 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { connect } from 'react-redux';
 import * as menuVisibleActions from '../../../redux/actions/menuVisibleActions';
+import useWindowDimensions from '../../../utils/useWindowsDimensions';
+
 
 function SidebarNavItem({ item, toggleMenu }) {
+  const { width } = useWindowDimensions();
+  
   function handleChange() {
-    toggleMenu();
+    if (width <= 767) { toggleMenu(); }
   }
 
   return (

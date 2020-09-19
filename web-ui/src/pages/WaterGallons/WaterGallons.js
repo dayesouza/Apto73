@@ -8,22 +8,22 @@ import List from './List/List';
 import { Button } from 'shards-react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Spinner from '../../components/Spinner/Spinner'
 
 class WaterGallons extends Component {
-  constructor(props) {
+  constructor() {
     super();
 
     this.state = {
-      waterList: [],
       error: null,
-      loading: false,
       refreshing: false,
+      redirectToAddCousePage: false
     };
   }
 
   componentDidMount() {
-    const { water } = this.props;
-    if (Object.keys(water).length === 0) {
+    const { waterList } = this.props;
+    if (Object.keys(waterList).length === 0) {
       this.fetchList();
     }
   }
@@ -41,29 +41,33 @@ class WaterGallons extends Component {
         <div className="d-flex justify-content-between">
           <h3>History</h3>
           <div>
-            <Link to="water-gallons/new">
+          {this.props.loading ? (
+          <Spinner />
+        ) : (
+            <Link to="water-gallon">
               <Button>
                 <FontAwesomeIcon icon="plus" />
                 Add
               </Button>
             </Link>
-          </div>
+        )}
         </div>
-        <List waterList={this.props.water} />
+        </div>
+        <List waterList={this.props.waterList} />
       </div>
     );
   }
 }
 
 WaterGallons.propTypes = {
-  water: PropTypes.array.isRequired,
+  waterList: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    water: state.water.sort((a, b) => {
+    waterList: state.waterList.sort((a, b) => {
       if (a.date < b.date) return 1;
       if (a.date > b.date) return -1;
       return 0;

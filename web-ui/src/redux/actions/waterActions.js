@@ -3,10 +3,10 @@ import * as types from './actionTypes';
 import waterService from '../../api/waterService';
 import { beginApiCall, apiCallError } from './apiStatusActions';
 
-export function loadWaterSuccess(water) {
+export function loadWaterSuccess(waterList) {
   return {
     type: types.LOAD_WATER_SUCCESS,
-    water,
+    waterList,
   };
 }
 
@@ -21,13 +21,6 @@ export function updateWaterSuccess(water) {
   return {
     type: types.UPDATE_WATER_SUCCESS,
     water,
-  };
-}
-
-export function getWaterById(id) {
-  return {
-    type: types.GET_WATER_BY_ID_SUCCESS,
-    id,
   };
 }
 
@@ -72,8 +65,8 @@ export function loadWater() {
     dispatch(beginApiCall());
     return waterService
       .get()
-      .then((water) => {
-        dispatch(loadWaterSuccess(water));
+      .then((waterList) => {
+        dispatch(loadWaterSuccess(waterList));
       })
       .catch((error) => {
         dispatch(apiCallError(error));

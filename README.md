@@ -12,7 +12,7 @@ The Authentication is with Azure AD;
 
 The back-end is in the folder `server` and it`s done with Node.JS, express and MongoDB;
 
-Status do Projeto: Em desenvolvimento :warning:
+Project status: Development :warning:
 
 ## How to run:
 

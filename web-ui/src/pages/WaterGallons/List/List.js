@@ -13,7 +13,7 @@ function List({ waterList, history }) {
         return (
           <Card
             key={water._id}
-            onClick={() => history.push(`/water-gallons/${water._id}`)}
+            onClick={() => history.push(`/water-gallon/${water._id}`)}
             className="mb-2 waterCard"
           >
             <CardBody>
