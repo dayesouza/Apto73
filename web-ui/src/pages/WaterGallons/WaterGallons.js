@@ -8,7 +8,7 @@ import List from './List/List';
 import { Button } from 'shards-react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Spinner from '../../components/Spinner/Spinner'
+import Spinner from '../../components/Spinner/Spinner';
 
 class WaterGallons extends Component {
   constructor() {
@@ -17,7 +17,6 @@ class WaterGallons extends Component {
     this.state = {
       error: null,
       refreshing: false,
-      redirectToAddCousePage: false
     };
   }
 
@@ -27,6 +26,12 @@ class WaterGallons extends Component {
       this.fetchList();
     }
   }
+
+  delete = (water) => {
+    return this.props.actions.deleteWater(water).catch((_) => {
+      this.setState({ error: 'Undefined error' });
+    });
+  };
 
   fetchList = () => {
     return this.props.actions.loadWater().catch((_) => {
@@ -41,19 +46,19 @@ class WaterGallons extends Component {
         <div className="d-flex justify-content-between">
           <h3>History</h3>
           <div>
-          {this.props.loading ? (
-          <Spinner />
-        ) : (
-            <Link to="water-gallon">
-              <Button>
-                <FontAwesomeIcon icon="plus" />
-                Add
-              </Button>
-            </Link>
-        )}
+            {this.props.loading ? (
+              <Spinner />
+            ) : (
+              <Link to="water-gallon">
+                <Button>
+                  <FontAwesomeIcon icon="plus" />
+                  Add
+                </Button>
+              </Link>
+            )}
+          </div>
         </div>
-        </div>
-        <List waterList={this.props.waterList} />
+        <List deleteWater={this.delete} waterList={this.props.waterList} />
       </div>
     );
   }
@@ -80,6 +85,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       loadWater: bindActionCreators(waterActions.loadWater, dispatch),
+      deleteWater: bindActionCreators(waterActions.deleteWater, dispatch),
     },
   };
 }

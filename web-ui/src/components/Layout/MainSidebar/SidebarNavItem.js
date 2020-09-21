@@ -7,12 +7,13 @@ import { connect } from 'react-redux';
 import * as menuVisibleActions from '../../../redux/actions/menuVisibleActions';
 import useWindowDimensions from '../../../utils/useWindowsDimensions';
 
-
 function SidebarNavItem({ item, toggleMenu }) {
   const { width } = useWindowDimensions();
-  
+
   function handleChange() {
-    if (width <= 767) { toggleMenu(); }
+    if (width <= 767) {
+      toggleMenu();
+    }
   }
 
   return (
@@ -22,7 +23,9 @@ function SidebarNavItem({ item, toggleMenu }) {
       className="sidebarMain__navItem"
       activeClassName="sidebarMain__navItem--selected"
     >
-      <FontAwesomeIcon icon={item.icon} />
+      <span>
+        <FontAwesomeIcon icon={item.icon} />
+      </span>
       <span className="ml-1">{item.name}</span>
     </NavLink>
   );

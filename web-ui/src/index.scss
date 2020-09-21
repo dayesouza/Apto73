@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+.btn-block + .btn-block {
+  margin-top: unset;
+}
+
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~shards-ui/dist/css/shards.min.css';
 @import './assets/scss/theme.scss';

@@ -1,29 +1,21 @@
 import React from 'react';
 
-import moment from 'moment';
-import { Card, CardBody, CardTitle } from 'shards-react';
 import './List.scss';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import ListItem from './ListItem';
 
-function List({ waterList, history }) {
+function List({ waterList, history, deleteWater }) {
   return (
     <div>
       {waterList.map((water) => {
         return (
-          <Card
+          <ListItem
             key={water._id}
-            onClick={() => history.push(`/water-gallon/${water._id}`)}
-            className="mb-2 waterCard"
-          >
-            <CardBody>
-              <CardTitle className="d-flex justify-content-between">
-                <span>{moment(water.date).format('DD/MM/y')} </span>
-                <span>{water.user}</span>
-              </CardTitle>
-              <span>R${water.value}</span>
-            </CardBody>
-          </Card>
+            water={water}
+            history={history}
+            deleteWater={deleteWater}
+          />
         );
       })}
     </div>
@@ -32,6 +24,7 @@ function List({ waterList, history }) {
 
 List.propTypes = {
   waterList: PropTypes.array.isRequired,
+  deleteWater: PropTypes.func.isRequired,
 };
 
 export default withRouter(List);
