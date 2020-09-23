@@ -1,45 +1,80 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { AzureAD, withAuthentication } from 'react-aad-msal';
+import { AzureAD, AuthenticationState } from 'react-aad-msal';
 
-import routes from './routes';
-import DefaultLayout from './components/Layout/Default/Default';
-import authProvider from './auth/authProvider';
-import configureStore from './redux/configureStore';
+import { authProvider } from './auth/authProvider';
+import AppRouter from './pages/Router';
+import Login from './pages/Login/Login';
 
-const store = configureStore();
+import { connect } from 'react-redux';
 
+// const store = configureStore();
 class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  updateServiceWorker = () => {
+    const registrationWaiting = this.props.serviceWorkerRegistration.waiting;
+
+    if (registrationWaiting) {
+      registrationWaiting.postMessage({ type: 'SKIP_WAITING' });
+
+      registrationWaiting.addEventListener('statechange', (e) => {
+        if (e.target.state === 'activated') {
+          window.location.reload();
+        }
+      });
+    }
+  };
+
   render() {
     return (
-      <Provider store={store}>
-        <Router>
-          <div>
-            <Switch>
-              {routes.map((route, index) => (
-                <Route
-                  /* eslint-disable-next-line react/no-array-index-key */
-                  key={index}
-                  path={route.path}
-                  exact
-                  component={(props) => (
-                    <DefaultLayout>
-                      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-                      <route.component {...props} />
-                    </DefaultLayout>
-                  )}
-                />
-              ))}
-            </Switch>
-          </div>
-        </Router>
+      <Provider store={this.props.store}>
+        <div className="Apasdasdp-alert">
+          {this.props.serviceWorkerUpdated && (
+            <p onClick={() => this.updateServiceWorker()}>
+              NEW VERSION AVAILABLE, click here to update
+            </p>
+          )}
+        </div>
+
+        <AzureAD
+          provider={authProvider}
+          reduxStore={this.props.store}
+          forceLogin
+        >
+          {({ login, authenticationState, error }) => {
+            switch (authenticationState) {
+              case AuthenticationState.Authenticated:
+                return <AppRouter />;
+              case AuthenticationState.Unauthenticated:
+                return <Login error={error} login={login} />;
+              case AuthenticationState.InProgress:
+                return <p>Authenticating...</p>;
+            }
+          }}
+        </AzureAD>
       </Provider>
     );
   }
 }
 
-export default withAuthentication(App, {
-  provider: authProvider,
-  reduxStore: store,
-});
+function mapStateToProps(state) {
+  return {
+    serviceWorkerUpdated: state.serviceWorker.serviceWorkerUpdated,
+    serviceWorkerInitialized: state.serviceWorker.serviceWorkerInitialized,
+    serviceWorkerRegistration: state.serviceWorker.serviceWorkerRegistration,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      // loadWater: bindActionCreators(waterActions.loadWater, dispatch),
+      // deleteWater: bindActionCreators(waterActions.deleteWater, dispatch),
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

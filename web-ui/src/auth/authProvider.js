@@ -17,6 +17,4 @@ const options = {
   tokenRefreshUri: `${window.location.origin}/auth.html`,
 };
 
-const authProvider = new MsalAuthProvider(config, options);
-
-export { authProvider as default };
+export const authProvider = new MsalAuthProvider(config, options);
