@@ -5,6 +5,7 @@ import NotFound from './pages/NotFound/NotFound';
 import WaterGallons from './pages/WaterGallons/WaterGallons';
 import WaterAdd from './pages/WaterGallons/Add/Add';
 import Residents from './pages/Residents/Residents';
+import ResidentAdd from './pages/Residents/Add/Add';
 
 export default [
   {
@@ -33,6 +34,11 @@ export default [
     name: 'Water Gallons',
     sidemenu: true,
     icon: 'tint',
+  },
+  {
+    path: '/resident',
+    component: ResidentAdd,
+    sidemenu: false,
   },
   {
     path: '/residents',

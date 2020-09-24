@@ -5,11 +5,13 @@ import { connect } from 'react-redux';
 import * as waterActions from '../../redux/actions/waterActions';
 import { bindActionCreators } from 'redux';
 import List from './List/List';
-import { Button } from 'shards-react';
+import { Button, Col, Row } from 'shards-react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Spinner from '../../components/Spinner/Spinner';
 import Toastr from '../../helpers/Toastr/Toastr';
+import AddButton from '../../components/AddButton/AddButton';
+import InfoCard from '../../components/InfoCard/InfoCard';
 
 class WaterGallons extends Component {
   constructor() {
@@ -18,10 +20,13 @@ class WaterGallons extends Component {
     this.state = {
       error: null,
       refreshing: false,
+      totalValue: 0,
+      nextToBuy : ''
     };
   }
-
+  
   componentDidMount() {
+    console.log('water',this.props.waterList)
     const { waterList } = this.props;
     if (Object.keys(waterList).length === 0) {
       this.fetchList();
@@ -39,6 +44,16 @@ class WaterGallons extends Component {
       });
   };
 
+  totalValue = () => {
+    const total = this.props.waterList.reduce((sum, object) => parseInt(object.value) + sum, 0);
+    return `$ ${total}`
+  }
+
+  nextOne = () => {
+    const latestUser = this.props.waterList[0]?.user;
+    return latestUser == "Day" ? 'Pri' : 'Day';
+  }
+
   fetchList = () => {
     return this.props.actions.loadWater().catch((_) => {
       this.setState({ error: 'Undefined error' });
@@ -49,19 +64,26 @@ class WaterGallons extends Component {
     return (
       <div>
         <h1>Water Gallons</h1>
+          <Row className="mb-3">
+            <Col>
+              <InfoCard title="Next to buy" value={this.nextOne()}/>
+            </Col>
+            <Col>
+              <InfoCard title="Total spend" value={this.totalValue()}/>
+            </Col>
+          </Row>
         <div className="d-flex justify-content-between">
           <h3>History</h3>
           <div>
             {this.props.loading ? (
-              <Spinner />
+              <Col>
+                <Spinner />
+              </Col>
             ) : (
-              <Link to="water-gallon">
-                <Button>
-                  <FontAwesomeIcon icon="plus" />
-                  Add
-                </Button>
-              </Link>
-            )}
+                <Link to="water-gallon">
+                  <AddButton />
+                </Link>
+              )}
           </div>
         </div>
         <List deleteWater={this.delete} waterList={this.props.waterList} />
