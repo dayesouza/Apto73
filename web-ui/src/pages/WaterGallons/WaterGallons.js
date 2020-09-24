@@ -9,6 +9,7 @@ import { Button } from 'shards-react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Spinner from '../../components/Spinner/Spinner';
+import Toastr from '../../helpers/Toastr/Toastr';
 
 class WaterGallons extends Component {
   constructor() {
@@ -28,9 +29,14 @@ class WaterGallons extends Component {
   }
 
   delete = (water) => {
-    return this.props.actions.deleteWater(water).catch((_) => {
-      this.setState({ error: 'Undefined error' });
-    });
+    return this.props.actions
+      .deleteWater(water)
+      .then((_) => {
+        Toastr.success('Deleted successfully!');
+      })
+      .catch((_) => {
+        this.setState({ error: 'Undefined error' });
+      });
   };
 
   fetchList = () => {

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as waterActions from '../../../redux/actions/waterActions';
 import { Alert } from 'shards-react';
+import Toastr from '../../../helpers/Toastr/Toastr';
 
 function Add({ waterList, loadWaterList, saveWater, history, ...props }) {
   const [water, setWater] = useState({ ...props.water });
@@ -13,36 +14,37 @@ function Add({ waterList, loadWaterList, saveWater, history, ...props }) {
 
   useEffect(() => {
     if (waterList.length === 0) {
-      loadWaterList().catch(_ => {
-        alert("Loading water failed");
+      loadWaterList().catch((_) => {
+        alert('Loading water failed');
       });
-    }
-    else {
+    } else {
       setWater({ ...props.water });
     }
-
   }, [waterList]); //will only run once when the component mounts
 
   function save(values) {
     values.date = new Date(values.date);
     saveWater(values)
       .then((_) => {
+        Toastr.success('Saved successfully!');
         history.push('/water-gallons');
       })
       .catch((_) =>
         setErrors({ error: 'Undefined error. Please try again later.' })
       );
-  };
+  }
 
   return (
     <>
       <h1>Add new water gallon</h1>
 
-      {errors.length > 0 && 
+      {errors.length > 0 && (
         <Alert theme="danger">
-          {errors.map(e => <p>{e}</p>)}
+          {errors.map((e) => (
+            <p>{e}</p>
+          ))}
         </Alert>
-      }
+      )}
       <Form save={save} water={water} />
     </>
   );
@@ -53,11 +55,11 @@ Add.propTypes = {
   waterList: PropTypes.array.isRequired,
   loadWaterList: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  saveWater: PropTypes.func.isRequired
+  saveWater: PropTypes.func.isRequired,
 };
 
 export function getWaterBySlug(waterList, slug) {
-  return waterList.find(water => water._id === slug || null);
+  return waterList.find((water) => water._id === slug || null);
 }
 
 function mapStateToProps(state, ownProps) {
@@ -70,7 +72,7 @@ function mapStateToProps(state, ownProps) {
   return {
     loading: state.apiCallsInProgress > 0,
     water,
-    waterList: state.waterList
+    waterList: state.waterList,
   };
 }
 
@@ -78,6 +80,6 @@ const mapDispatchToProps = {
   saveWater: waterActions.saveWater,
   deleteWater: waterActions.deleteWater,
   loadWaterList: waterActions.loadWater,
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Add);

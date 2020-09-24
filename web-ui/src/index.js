@@ -4,6 +4,7 @@ import * as serviceWorker from './serviceWorker';
 import { render } from 'react-dom';
 import './index.scss';
 import './components/icon-library';
+import 'toastr/build/toastr.min.css';
 import App from './App';
 import * as types from './redux/actions/actionTypes';
 

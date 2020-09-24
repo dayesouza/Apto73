@@ -14,6 +14,19 @@ class App extends Component {
     super(props);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.serviceWorkerUpdated !== this.props.serviceWorkerUpdated) {
+      if (
+        //eslint-disable-next-line
+        confirm(
+          'Apto 73 website has been updated. Would you like to reload to display the latest version?'
+        )
+      ) {
+        this.updateServiceWorker();
+      }
+    }
+  }
+
   updateServiceWorker = () => {
     const registrationWaiting = this.props.serviceWorkerRegistration.waiting;
 
@@ -31,14 +44,6 @@ class App extends Component {
   render() {
     return (
       <Provider store={this.props.store}>
-        <div className="Apasdasdp-alert">
-          {this.props.serviceWorkerUpdated && (
-            <p onClick={() => this.updateServiceWorker()}>
-              NEW VERSION AVAILABLE, click here to update
-            </p>
-          )}
-        </div>
-
         <AzureAD
           provider={authProvider}
           reduxStore={this.props.store}
