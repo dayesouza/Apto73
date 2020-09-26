@@ -9,6 +9,7 @@ export default function Footer() {
         {/* eslint-disable-next-line */}
         {year} - Dayenne Souza
         <a
+          aria-label="My Github"
           rel="noopener noreferrer"
           href="https://github.com/dayesouza"
           target="_blank"
@@ -16,6 +17,7 @@ export default function Footer() {
           <FontAwesomeIcon className="mx-2" icon={['fab', 'github']} />
         </a>
         <a
+          aria-label="My Website"
           rel="noopener noreferrer"
           href="http://dayesouza.github.io/"
           target="_blank"

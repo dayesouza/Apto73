@@ -14,6 +14,7 @@ function NavbarToggle({ toggleMenu, menuVisible, icon }) {
     <nav className="nav">
       <button
         type="button"
+        aria-label="Toggle Menu"
         onClick={handleClick}
         className="nav-link btn btn-link nav-link-icon d-sm-inline d-md-inline d-lg-none"
       >
