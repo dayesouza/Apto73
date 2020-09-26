@@ -21,12 +21,12 @@ class WaterGallons extends Component {
       error: null,
       refreshing: false,
       totalValue: 0,
-      nextToBuy : ''
+      nextToBuy: '',
     };
   }
-  
+
   componentDidMount() {
-    console.log('water',this.props.waterList)
+    console.log('water', this.props.waterList);
     const { waterList } = this.props;
     if (Object.keys(waterList).length === 0) {
       this.fetchList();
@@ -45,14 +45,17 @@ class WaterGallons extends Component {
   };
 
   totalValue = () => {
-    const total = this.props.waterList.reduce((sum, object) => parseInt(object.value) + sum, 0);
-    return `$ ${total}`
-  }
+    const total = this.props.waterList.reduce(
+      (sum, object) => parseInt(object.value) + sum,
+      0
+    );
+    return `$ ${total}`;
+  };
 
   nextOne = () => {
     const latestUser = this.props.waterList[0]?.user;
-    return latestUser == "Day" ? 'Pri' : 'Day';
-  }
+    return latestUser == 'Day' ? 'Pri' : 'Day';
+  };
 
   fetchList = () => {
     return this.props.actions.loadWater().catch((_) => {
@@ -64,14 +67,14 @@ class WaterGallons extends Component {
     return (
       <div>
         <h1>Water Gallons</h1>
-          <Row className="mb-3">
-            <Col>
-              <InfoCard title="Next to buy" value={this.nextOne()}/>
-            </Col>
-            <Col>
-              <InfoCard title="Total spend" value={this.totalValue()}/>
-            </Col>
-          </Row>
+        <Row>
+          <Col className="mb-3">
+            <InfoCard title="Next to buy" value={this.nextOne()} />
+          </Col>
+          <Col className="mb-3">
+            <InfoCard title="Total spend" value={this.totalValue()} />
+          </Col>
+        </Row>
         <div className="d-flex justify-content-between">
           <h3>History</h3>
           <div>
@@ -80,10 +83,10 @@ class WaterGallons extends Component {
                 <Spinner />
               </Col>
             ) : (
-                <Link to="water-gallon">
-                  <AddButton />
-                </Link>
-              )}
+              <Link to="water-gallon">
+                <AddButton />
+              </Link>
+            )}
           </div>
         </div>
         <List deleteWater={this.delete} waterList={this.props.waterList} />
