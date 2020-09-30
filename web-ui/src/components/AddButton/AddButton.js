@@ -8,5 +8,5 @@ export default function AddButton() {
       <FontAwesomeIcon icon="plus" />
       Add
     </Button>
-  )
+  );
 }

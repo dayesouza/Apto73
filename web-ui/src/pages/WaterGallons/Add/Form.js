@@ -1,22 +1,47 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormInput, FormGroup, Button, FormFeedback } from 'shards-react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import ButtonOptions from '../../../components/ButtonOptions/ButtonOptions';
+import DatePicker from '../../../components/DatePicker/DatePicker';
 
 export default function FormWater({ save, water }) {
+  const [showDateField, setShowDateField] = useState(false);
   const { register, handleSubmit, errors, reset, setValue, watch } = useForm();
 
-  const userOptions = ['Day', 'Pri'];
+  const today = new Date().toLocaleDateString();
+  const yesterday = new Date(
+    new Date().setDate(new Date().getDate() - 1)
+  ).toLocaleDateString();
+
+  const userOptions = [
+    { name: 'Day', value: 'Day' },
+    { name: 'Pri', value: 'Pri' },
+  ];
+  const dateOptions = [
+    { name: 'Today', value: today },
+    { name: 'Yesterday', value: yesterday },
+    { name: 'Custom', value: 'Custom' },
+  ];
 
   const watchUserValue = watch('user', water.user ? water.user : null);
+  const watchDateValue = watch('date', water.date ? water.date : new Date());
 
   const changeUser = (user) => {
     setValue('user', user);
   };
 
+  const changeDate = (date) => {
+    if (date === 'Custom') {
+      setShowDateField(true);
+      return;
+    }
+    setValue('date', date);
+  };
+
   useEffect(() => {
     reset(water);
+    if (water._id) setShowDateField(true);
   }, [water]);
 
   const onSave = (data) => save(data);
@@ -27,13 +52,29 @@ export default function FormWater({ save, water }) {
           <input name="_id" ref={register()} id="_id" type="hidden" />
         )}
         <label htmlFor="date">Date</label>
+
+        {!water._id && (
+          <ButtonOptions
+            change={changeDate}
+            value={watchDateValue}
+            options={dateOptions}
+            lockOnLastButton={showDateField}
+          />
+        )}
+
+        {showDateField && (
+          <DatePicker
+            wrapperClassName="d-block"
+            selected={watchDateValue}
+            onSelect={changeDate}
+          />
+        )}
         <FormInput
           name="date"
           innerRef={register({ required: true })}
           id="date"
-          autoComplete="false"
+          className="d-none"
           invalid={errors.date}
-          placeholder="29/05/2020"
         />
         <FormFeedback>Please insert the date</FormFeedback>
       </FormGroup>
@@ -62,7 +103,7 @@ export default function FormWater({ save, water }) {
           innerRef={register({ min: 0, required: true })}
           name="value"
           id="price"
-          autoComplete="false"
+          autoComplete="off"
           invalid={errors.value}
           placeholder="R$ 14.00"
         />
@@ -75,4 +116,9 @@ export default function FormWater({ save, water }) {
 
 FormWater.propTypes = {
   save: PropTypes.func.isRequired,
+  water: PropTypes.object,
+};
+
+FormWater.defaultProps = {
+  water: {},
 };

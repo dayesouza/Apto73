@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default function Add() {
-  return <h1>Add resident</h1>
+  return <h1>Add resident</h1>;
 }

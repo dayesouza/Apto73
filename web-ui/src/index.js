@@ -1,7 +1,7 @@
 import React from 'react';
+import { render } from 'react-dom';
 import configureStore from './redux/configureStore';
 import * as serviceWorker from './serviceWorker';
-import { render } from 'react-dom';
 import './index.scss';
 import './components/icon-library';
 import 'toastr/build/toastr.min.css';

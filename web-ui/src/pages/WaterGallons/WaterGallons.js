@@ -5,9 +5,8 @@ import { connect } from 'react-redux';
 import * as waterActions from '../../redux/actions/waterActions';
 import { bindActionCreators } from 'redux';
 import List from './List/List';
-import { Button, Col, Row } from 'shards-react';
+import { Col, Row } from 'shards-react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Spinner from '../../components/Spinner/Spinner';
 import Toastr from '../../helpers/Toastr/Toastr';
 import AddButton from '../../components/AddButton/AddButton';
@@ -54,7 +53,7 @@ class WaterGallons extends Component {
 
   nextOne = () => {
     const latestUser = this.props.waterList[0]?.user;
-    return latestUser == 'Day' ? 'Pri' : 'Day';
+    return latestUser === 'Day' ? 'Pri' : 'Day';
   };
 
   fetchList = () => {

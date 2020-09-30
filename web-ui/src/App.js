@@ -10,10 +10,6 @@ import { connect } from 'react-redux';
 
 // const store = configureStore();
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidUpdate(prevProps) {
     if (prevProps.serviceWorkerUpdated !== this.props.serviceWorkerUpdated) {
       if (

@@ -43,12 +43,16 @@ export default function ListItem({ water, history, deleteWater }) {
             <span>{water.user}</span>
           </CardTitle>
           <div className="d-flex justify-content-between">
-            <span>R${water.value}</span>
+            <span>
+              R$
+              {water.value}
+            </span>
             <span>
               <Button
                 onClick={(e) => toggleConfirmDelete(e, water)}
                 size="sm"
                 outline
+                aria-label="Delete entry"
                 theme="danger"
               >
                 <FontAwesomeIcon icon="trash" />

@@ -3,7 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { Button, ButtonGroup } from 'shards-react';
 import PropTypes from 'prop-types';
 
-export default function ButtonOptions({ options, value, change }) {
+export default function ButtonOptions({
+  options,
+  value,
+  change,
+  lockOnLastButton,
+}) {
   const [selectedValue, setSelectedValue] = useState(value);
 
   useEffect(() => {
@@ -12,15 +17,19 @@ export default function ButtonOptions({ options, value, change }) {
 
   return (
     <ButtonGroup className="w-100">
-      {options.map((o) => (
+      {options.map((o, index) => (
         <Button
           block
-          key={o}
-          onClick={() => change(o)}
+          key={o.name}
+          onClick={() => change(o.value)}
           type="button"
-          active={selectedValue === o}
+          active={
+            lockOnLastButton
+              ? index + 1 === options.length
+              : selectedValue === o.value
+          }
         >
-          {o}
+          {o.name}
         </Button>
       ))}
     </ButtonGroup>
@@ -29,10 +38,12 @@ export default function ButtonOptions({ options, value, change }) {
 
 ButtonOptions.propTypes = {
   options: PropTypes.array.isRequired,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
   change: PropTypes.func.isRequired,
+  lockOnLastButton: PropTypes.bool,
 };
 
 ButtonOptions.defaultProps = {
   value: null,
+  lockOnLastButton: false,
 };

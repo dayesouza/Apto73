@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import Form from './Form';
 
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import * as waterActions from '../../../redux/actions/waterActions';
 import { Alert } from 'shards-react';
+import * as waterActions from '../../../redux/actions/waterActions';
+import Form from './Form';
 import Toastr from '../../../helpers/Toastr/Toastr';
 
 function Add({ waterList, loadWaterList, saveWater, history, ...props }) {
   const [water, setWater] = useState({ ...props.water });
   const [errors, setErrors] = useState({});
-  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     if (waterList.length === 0) {
@@ -20,7 +19,7 @@ function Add({ waterList, loadWaterList, saveWater, history, ...props }) {
     } else {
       setWater({ ...props.water });
     }
-  }, [waterList]); //will only run once when the component mounts
+  }, [waterList]);
 
   function save(values) {
     values.date = new Date(values.date);
