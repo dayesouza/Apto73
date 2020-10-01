@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import * as waterActions from '../../redux/actions/waterActions';
 import { bindActionCreators } from 'redux';
+import * as waterActions from '../../redux/actions/waterActions';
 import List from './List/List';
 import { Col, Row } from 'shards-react';
 import { Link } from 'react-router-dom';
@@ -13,8 +13,8 @@ import AddButton from '../../components/AddButton/AddButton';
 import InfoCard from '../../components/InfoCard/InfoCard';
 
 class WaterGallons extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       error: null,
@@ -25,7 +25,6 @@ class WaterGallons extends Component {
   }
 
   componentDidMount() {
-    console.log('water', this.props.waterList);
     const { waterList } = this.props;
     if (Object.keys(waterList).length === 0) {
       this.fetchList();

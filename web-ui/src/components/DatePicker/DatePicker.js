@@ -20,7 +20,7 @@ const DatePicker = ({ selected, onSelect, ...props }) => {
 };
 
 DatePicker.propTypes = {
-  selected: PropTypes.instanceOf(Date),
+  selected: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
   onSelect: PropTypes.func.isRequired,
 };
 

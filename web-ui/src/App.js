@@ -49,10 +49,10 @@ class App extends Component {
             switch (authenticationState) {
               case AuthenticationState.Authenticated:
                 return <AppRouter />;
-              case AuthenticationState.Unauthenticated:
-                return <Login error={error} login={login} />;
               case AuthenticationState.InProgress:
                 return <p>Authenticating...</p>;
+              default:
+                return <Login error={error} login={login} />;
             }
           }}
         </AzureAD>

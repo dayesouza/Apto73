@@ -4,6 +4,7 @@ import menuVisible from './menuVisibleReducer';
 import aadResponse from './aadResponseReducer';
 import waterList from './waterReducer';
 import serviceWorker from './serviceWorkerReducer';
+import residents from './residentsReducer';
 
 const rootReducer = combineReducers({
   apiCallsInProgress,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   aadResponse,
   waterList,
   serviceWorker,
+  residents,
 });
 
 export default rootReducer;

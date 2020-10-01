@@ -8,4 +8,5 @@ export default {
   apiCallsInProgess: 0,
   aadResponse: null,
   waterList: [],
+  residents: [],
 };
