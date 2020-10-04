@@ -59,7 +59,7 @@ class WaterGallons extends Component {
   nextOne = () => {
     const residents = this.props.residents;
     const latestUser = this.props.waterList[0]?.user;
-    const latestIndex = residents.findIndex((r) => r.name == latestUser);
+    const latestIndex = residents.findIndex((r) => r.name === latestUser);
 
     if (residents.length && latestIndex >= residents.length - 1) {
       return residents[0].name;

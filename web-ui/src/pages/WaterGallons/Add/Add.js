@@ -21,6 +21,11 @@ function Add({
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
+    fetchWaterList();
+    fetchResidents();
+  }, []);
+
+  const fetchWaterList = () => {
     if (waterList.length === 0) {
       loadWaterList().catch((_) => {
         alert('Loading water failed');
@@ -28,15 +33,15 @@ function Add({
     } else {
       setWater({ ...props.water });
     }
-  }, [waterList]);
+  };
 
-  useEffect(() => {
+  const fetchResidents = () => {
     if (residents.length === 0) {
       loadResidents().catch((_) => {
         alert('Loading residents failed');
       });
     }
-  }, [residents]);
+  };
 
   function save(values) {
     values.date = new Date(values.date);

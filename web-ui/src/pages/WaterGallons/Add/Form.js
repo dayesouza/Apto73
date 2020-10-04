@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import ButtonOptions from '../../../components/ButtonOptions/ButtonOptions';
 import DatePicker from '../../../components/DatePicker/DatePicker';
+import { Link } from 'react-router-dom';
 
 export default function FormWater({ save, water, residents }) {
   const [showDateField, setShowDateField] = useState(false);
@@ -89,12 +90,21 @@ export default function FormWater({ save, water, residents }) {
           invalid={errors.user}
         />
         <br />
-        <ButtonOptions
-          change={changeUser}
-          value={watchUserValue}
-          options={residents}
-          defaultValueProp="name"
-        />
+        {!residents.length && (
+          <h3>
+            <Link to="/resident">
+              <Button theme="warning">Please insert at least one here</Button>
+            </Link>
+          </h3>
+        )}
+        {residents.length > 0 && (
+          <ButtonOptions
+            change={changeUser}
+            value={watchUserValue}
+            options={residents}
+            defaultValueProp="name"
+          />
+        )}
         <FormFeedback>Please select the user</FormFeedback>
       </FormGroup>
 
