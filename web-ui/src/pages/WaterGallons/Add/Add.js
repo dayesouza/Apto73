@@ -4,10 +4,19 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Alert } from 'shards-react';
 import * as waterActions from '../../../redux/actions/waterActions';
+import * as residentsActions from '../../../redux/actions/residentActions';
 import Form from './Form';
 import Toastr from '../../../helpers/Toastr/Toastr';
 
-function Add({ waterList, loadWaterList, saveWater, history, ...props }) {
+function Add({
+  waterList,
+  loadWaterList,
+  loadResidents,
+  saveWater,
+  history,
+  residents,
+  ...props
+}) {
   const [water, setWater] = useState({ ...props.water });
   const [errors, setErrors] = useState({});
 
@@ -20,6 +29,14 @@ function Add({ waterList, loadWaterList, saveWater, history, ...props }) {
       setWater({ ...props.water });
     }
   }, [waterList]);
+
+  useEffect(() => {
+    if (residents.length === 0) {
+      loadResidents().catch((_) => {
+        alert('Loading residents failed');
+      });
+    }
+  }, [residents]);
 
   function save(values) {
     values.date = new Date(values.date);
@@ -44,7 +61,7 @@ function Add({ waterList, loadWaterList, saveWater, history, ...props }) {
           ))}
         </Alert>
       )}
-      <Form save={save} water={water} />
+      <Form save={save} residents={residents} water={water} />
     </>
   );
 }
@@ -53,8 +70,10 @@ Add.propTypes = {
   loading: PropTypes.bool.isRequired,
   waterList: PropTypes.array.isRequired,
   loadWaterList: PropTypes.func.isRequired,
+  loadResidents: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   saveWater: PropTypes.func.isRequired,
+  residents: PropTypes.array.isRequired,
 };
 
 export function getWaterBySlug(waterList, slug) {
@@ -72,6 +91,7 @@ function mapStateToProps(state, ownProps) {
     loading: state.apiCallsInProgress > 0,
     water,
     waterList: state.waterList,
+    residents: state.residents,
   };
 }
 
@@ -79,6 +99,7 @@ const mapDispatchToProps = {
   saveWater: waterActions.saveWater,
   deleteWater: waterActions.deleteWater,
   loadWaterList: waterActions.loadWater,
+  loadResidents: residentsActions.loadResidents,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Add);

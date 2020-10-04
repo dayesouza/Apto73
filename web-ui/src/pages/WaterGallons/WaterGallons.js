@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as waterActions from '../../redux/actions/waterActions';
+import * as residentActions from '../../redux/actions/residentActions';
 import List from './List/List';
 import { Col, Row } from 'shards-react';
 import { Link } from 'react-router-dom';
@@ -29,6 +30,11 @@ class WaterGallons extends Component {
     if (Object.keys(waterList).length === 0) {
       this.fetchList();
     }
+
+    const { residents } = this.props;
+    if (Object.keys(residents).length === 0) {
+      this.fetchResidentsList();
+    }
   }
 
   delete = (water) => {
@@ -51,12 +57,28 @@ class WaterGallons extends Component {
   };
 
   nextOne = () => {
+    const residents = this.props.residents;
     const latestUser = this.props.waterList[0]?.user;
-    return latestUser === 'Day' ? 'Pri' : 'Day';
+    const latestIndex = residents.findIndex((r) => r.name == latestUser);
+
+    if (residents.length && latestIndex >= residents.length - 1) {
+      return residents[0].name;
+    }
+
+    if (residents.length) {
+      return residents[latestIndex + 1].name;
+    }
+    return '--';
   };
 
   fetchList = () => {
     return this.props.actions.loadWater().catch((_) => {
+      this.setState({ error: 'Undefined error' });
+    });
+  };
+
+  fetchResidentsList = () => {
+    return this.props.actions.loadResidents().catch((_) => {
       this.setState({ error: 'Undefined error' });
     });
   };
@@ -97,6 +119,7 @@ WaterGallons.propTypes = {
   waterList: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
+  residents: PropTypes.array.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -107,6 +130,7 @@ function mapStateToProps(state) {
       return 0;
     }),
     loading: state.apiCallsInProgress > 0,
+    residents: state.residents,
   };
 }
 
@@ -115,6 +139,10 @@ function mapDispatchToProps(dispatch) {
     actions: {
       loadWater: bindActionCreators(waterActions.loadWater, dispatch),
       deleteWater: bindActionCreators(waterActions.deleteWater, dispatch),
+      loadResidents: bindActionCreators(
+        residentActions.loadResidents,
+        dispatch
+      ),
     },
   };
 }

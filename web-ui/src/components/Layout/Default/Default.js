@@ -28,7 +28,7 @@ const DefaultLayout = ({ children, menuVisible, toggleMenu }) => {
           tag="main"
         >
           <MainNavbar />
-          <Container fluid className="mt-2">
+          <Container fluid className="my-2">
             {children}
           </Container>
           <Footer />

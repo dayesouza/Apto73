@@ -5,8 +5,9 @@ import { useForm } from 'react-hook-form';
 import ButtonOptions from '../../../components/ButtonOptions/ButtonOptions';
 import DatePicker from '../../../components/DatePicker/DatePicker';
 
-export default function FormWater({ save, water }) {
+export default function FormWater({ save, water, residents }) {
   const [showDateField, setShowDateField] = useState(false);
+  const [residentsList, setResidentsList] = useState(residents);
   const { register, handleSubmit, errors, reset, setValue, watch } = useForm();
 
   const today = new Date().toLocaleDateString();
@@ -14,10 +15,6 @@ export default function FormWater({ save, water }) {
     new Date().setDate(new Date().getDate() - 1)
   ).toLocaleDateString();
 
-  const userOptions = [
-    { name: 'Day', value: 'Day' },
-    { name: 'Pri', value: 'Pri' },
-  ];
   const dateOptions = [
     { name: 'Today', value: today },
     { name: 'Yesterday', value: yesterday },
@@ -43,6 +40,10 @@ export default function FormWater({ save, water }) {
     reset(water);
     if (water._id) setShowDateField(true);
   }, [water]);
+
+  useEffect(() => {
+    setResidentsList(residents);
+  }, [residents]);
 
   const onSave = (data) => save(data);
   return (
@@ -91,7 +92,8 @@ export default function FormWater({ save, water }) {
         <ButtonOptions
           change={changeUser}
           value={watchUserValue}
-          options={userOptions}
+          options={residents}
+          defaultValueProp="name"
         />
         <FormFeedback>Please select the user</FormFeedback>
       </FormGroup>
@@ -116,6 +118,7 @@ export default function FormWater({ save, water }) {
 
 FormWater.propTypes = {
   save: PropTypes.func.isRequired,
+  residents: PropTypes.array.isRequired,
   water: PropTypes.object,
 };
 

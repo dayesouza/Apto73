@@ -8,7 +8,7 @@ export default function List({ residents }) {
     <Row>
       {residents.map((r) => {
         return (
-          <Col md={6} sm={12}>
+          <Col md={6} sm={12} key={r._id} className="mt-2">
             <Item resident={r} />
           </Col>
         );
