@@ -112,6 +112,7 @@ export default function FormWater({ save, water, residents }) {
         <label htmlFor="price">How much was it</label>
         <FormInput
           type="number"
+          step="0.01"
           innerRef={register({ min: 0, required: true })}
           name="value"
           id="price"
