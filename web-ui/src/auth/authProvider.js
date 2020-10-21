@@ -8,12 +8,12 @@ const config = {
   },
   cache: {
     cacheLocation: 'localStorage',
-    storeAuthStateInCookie: false,
+    storeAuthStateInCookie: true,
   },
 };
 
 const options = {
-  loginType: LoginType.Redirect,
+  loginType: LoginType.Popup,
   tokenRefreshUri: `${window.location.origin}/auth.html`,
 };
 

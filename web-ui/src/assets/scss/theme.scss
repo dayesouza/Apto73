@@ -3,12 +3,13 @@
 :root {
   --color-page-background: #{$bg-grey};
   --color-text: #{$black};
-  --sidebar-bg-color: #{$white-sidebar-bg};
+  --sidebar-bg-color: #{$primary-green};
   --footer-bg-color: #{$white-footer-bg};
   --logo-color: #{$black};
   --navbar-bg-color: #{$white-sidebar-bg};
   --primary: #{$primary-green};
   --card-color: #{$white};
+  --menu-selected: #{$menu-selected};
 }
 
 .dark {
@@ -20,6 +21,7 @@
   --navbar-bg-color: #{$primary-green};
   --primary: #{$primary-green};
   --card-color: #{$dark-grey};
+  --menu-selected: #{$menu-selected};
 }
 
 body {
@@ -61,12 +63,13 @@ a {
   color: var(--color-text);
 }
 
-.sidebarMain__navItem--selected {
-  border: 1px solid black;
+.mainSidebar {
+  background-color: var(--sidebar-bg-color);
+  color: var(--color-page-background);
 }
 
-.rule {
-  border-top: 1px solid var(--color-text);
+.sidebarMain__navItem--selected {
+  background-color: var(--menu-selected);
 }
 
 .waterCard,

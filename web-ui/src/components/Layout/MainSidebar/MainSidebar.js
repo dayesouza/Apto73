@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import SidebarMainNavbar from './SidebarMainNavbar';
 import SidebarNavItems from './SidebarNavItems';
 import './MainSidebar.scss';
 import Rule from '../../Rule/Rule';
@@ -17,7 +16,6 @@ function MainSidebar({ menuVisible }) {
 
   return (
     <Col tag="aside" className={classes} lg={2} md={3}>
-      <SidebarMainNavbar />
       <Rule />
       <SidebarNavItems />
     </Col>

@@ -1,3 +1,5 @@
+@import '../../../assets/scss/colors.scss';
+
 @media (max-width: 767.98px) {
   .mainSidebar {
     transform: translateX(-100%);
@@ -29,8 +31,16 @@
 }
 
 .sidebarMain__navItem {
+  color: white;
   padding: 5px;
   svg {
     min-width: 20px;
+  }
+
+  &:hover {
+    border-radius: 6px;
+    color: white;
+    text-decoration: none;
+    box-shadow: inset 0px 0px 0px 1px white;
   }
 }
