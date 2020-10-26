@@ -103,7 +103,7 @@ class WaterGallons extends Component {
                 <Spinner />
               </Col>
             ) : (
-              <Link to="water-gallon">
+              <Link to="water-gallons/add">
                 <AddButton />
               </Link>
             )}

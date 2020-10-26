@@ -14,6 +14,7 @@ import {
   faUsers,
   faUser,
   faCalendar,
+  faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -29,7 +30,8 @@ library.add(
   faTrash,
   faUsers,
   faUser,
-  faCalendar
+  faCalendar,
+  faChevronLeft
 );
 
 /*

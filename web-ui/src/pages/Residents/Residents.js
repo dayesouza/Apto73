@@ -37,7 +37,7 @@ class Residents extends Component {
     return (
       <>
         <h1>Residents</h1>
-        <Link to="resident">
+        <Link to="residents/add">
           <AddButton />
         </Link>
 

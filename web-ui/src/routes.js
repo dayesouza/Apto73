@@ -25,7 +25,7 @@ export default [
     component: WaterAdd,
   },
   {
-    path: '/water-gallon',
+    path: '/water-gallons/add',
     component: WaterAdd,
   },
   {
@@ -36,7 +36,7 @@ export default [
     icon: 'tint',
   },
   {
-    path: '/resident',
+    path: '/residents/add',
     component: ResidentAdd,
     sidemenu: false,
   },
