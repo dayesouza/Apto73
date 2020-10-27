@@ -11,7 +11,7 @@ import Rule from '../../Rule/Rule';
 import UserInfo from './UserInfo';
 
 function MainSidebar({ menuVisible }) {
-  const classes = classNames('mainSidebar', 'vh-100', 'col-12', {
+  const classes = classNames('mainSidebar', 'vh-100', 'p-0', 'col-12', {
     'mainSidebar--open': menuVisible,
   });
 

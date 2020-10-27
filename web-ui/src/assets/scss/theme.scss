@@ -2,26 +2,26 @@
 
 :root {
   --color-page-background: #{$bg-grey};
-  --color-text: #{$black};
-  --sidebar-bg-color: #{$primary-green};
+  --color-text: #{$font-color};
+  --sidebar-bg-color: #{$white};
   --footer-bg-color: #{$white-footer-bg};
   --logo-color: #{$black};
   --navbar-bg-color: #{$white-sidebar-bg};
   --primary: #{$primary-green};
   --card-color: #{$white};
-  --menu-selected: #{$menu-selected};
+  --menu-selected: #{$light-grey};
 }
 
 .dark {
   --color-page-background: #{$black};
   --color-text: #{$bg-grey};
-  --sidebar-bg-color: #{$primary-green};
+  --sidebar-bg-color: #{$dark-footer-bg};
   --footer-bg-color: #{$dark-footer-bg};
   --logo-color: #{$white};
   --navbar-bg-color: #{$primary-green};
   --primary: #{$primary-green};
   --card-color: #{$dark-grey};
-  --menu-selected: #{$menu-selected};
+  --menu-selected: #{$dark-grey};
 }
 
 body {
@@ -65,11 +65,14 @@ a {
 
 .mainSidebar {
   background-color: var(--sidebar-bg-color);
-  color: var(--color-page-background);
 }
 
-.sidebarMain__navItem--selected {
-  background-color: var(--menu-selected);
+.sidebarMain__navItem--selected,
+.sidebarMain__navItem:hover {
+  box-shadow: inset 0.1875rem 0 0 var(--primary);
+  background-color: #fbfbfb;
+  color: var(--primary);
+  text-decoration: none;
 }
 
 .waterCard,

@@ -20,13 +20,13 @@ function SidebarNavItem({ item, toggleMenu }) {
     <NavLink
       onClick={handleChange}
       to={item.path}
-      className="sidebarMain__navItem"
+      className="sidebarMain__navItem py-3"
       activeClassName="sidebarMain__navItem--selected"
     >
-      <span>
+      <span className="ml-3">
         <FontAwesomeIcon icon={item.icon} />
       </span>
-      <span className="ml-1">{item.name}</span>
+      <span className="ml-2">{item.name}</span>
     </NavLink>
   );
 }

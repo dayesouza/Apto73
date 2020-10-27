@@ -69,13 +69,4 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: {
-      // loadWater: bindActionCreators(waterActions.loadWater, dispatch),
-      // deleteWater: bindActionCreators(waterActions.deleteWater, dispatch),
-    },
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

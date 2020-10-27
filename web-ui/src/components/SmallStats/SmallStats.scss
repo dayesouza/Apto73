@@ -1,0 +1,10 @@
+.stats-small {
+  min-height: 8.7rem;
+  overflow: hidden !important;
+
+  canvas {
+    position: absolute;
+    bottom: 0;
+    opacity: 0.5;
+  }
+}
