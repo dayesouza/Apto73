@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'shards-react';
 
@@ -9,8 +9,15 @@ import Footer from '../Footer/Footer';
 
 import { connect } from 'react-redux';
 import * as menuVisibleActions from '../../../redux/actions/menuVisibleActions';
+import * as userActions from '../../../redux/actions/userActions';
 
-const DefaultLayout = ({ children, menuVisible, toggleMenu }) => {
+const DefaultLayout = ({ children, menuVisible, toggleMenu, auth, saveAuthenticatedUser}) => {
+  
+  useEffect(() => {
+    // eslint-disable-next-line react/prop-types
+    if (auth) saveAuthenticatedUser(auth.user);
+  }, [auth]);
+
   const shouldCloseMenu = () => {
     if (menuVisible) toggleMenu(menuVisible);
   };
@@ -39,15 +46,17 @@ const DefaultLayout = ({ children, menuVisible, toggleMenu }) => {
 };
 
 function mapStateToProps(state) {
-  const { menuVisible } = state;
+  const { menuVisible, user } = state;
 
   return {
     menuVisible,
+    user
   };
 }
 
 const mapDispatchToProps = {
   toggleMenu: menuVisibleActions.toggleMenuVisible,
+  saveAuthenticatedUser: userActions.saveAuthenticatedUser,
 };
 
 DefaultLayout.propTypes = {
@@ -55,6 +64,13 @@ DefaultLayout.propTypes = {
   children: PropTypes.any.isRequired,
   menuVisible: PropTypes.bool.isRequired,
   toggleMenu: PropTypes.func.isRequired,
+  saveAuthenticatedUser: PropTypes.func.isRequired,
+    // eslint-disable-next-line react/forbid-prop-types
+  auth: PropTypes.object,
 };
+
+DefaultLayout.defaultProps = {
+  auth: {}
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(DefaultLayout);

@@ -9,4 +9,5 @@ export default {
   aadResponse: null,
   waterList: [],
   residents: [],
+  user: null
 };

@@ -5,6 +5,7 @@ import aadResponse from './aadResponseReducer';
 import waterList from './waterReducer';
 import serviceWorker from './serviceWorkerReducer';
 import residents from './residentsReducer';
+import user from './userReducer';
 
 const rootReducer = combineReducers({
   apiCallsInProgress,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   waterList,
   serviceWorker,
   residents,
+  user
 });
 
 export default rootReducer;

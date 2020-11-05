@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { AzureAD, AuthenticationState } from 'react-aad-msal';
-
-import { authProvider } from './auth/authProvider';
-import AppRouter from './pages/Router';
-import Login from './pages/Login/Login';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import DefaultLayout from './components/Layout/Default/Default';
+import routes from './routes';
 
 import { connect } from 'react-redux';
+import { withAuth } from './auth/MsalAuthProvider';
 
 // const store = configureStore();
 class App extends Component {
@@ -40,22 +39,24 @@ class App extends Component {
   render() {
     return (
       <Provider store={this.props.store}>
-        <AzureAD
-          provider={authProvider}
-          reduxStore={this.props.store}
-          forceLogin
-        >
-          {({ login, authenticationState, error }) => {
-            switch (authenticationState) {
-              case AuthenticationState.Authenticated:
-                return <AppRouter />;
-              case AuthenticationState.InProgress:
-                return <p>Authenticating...</p>;
-              default:
-                return <Login error={error} login={login} />;
-            }
-          }}
-        </AzureAD>
+        <Router>
+          <Switch>
+            {routes.map((route, index) => (
+              <Route
+                /* eslint-disable-next-line react/no-array-index-key */
+                key={index}
+                path={route.path}
+                exact
+                component={(props) => (
+                  <DefaultLayout auth={this.props.auth}>
+                    {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+                    <route.component {...props} />
+                  </DefaultLayout>
+                )}
+              />
+            ))}
+          </Switch>
+        </Router>
       </Provider>
     );
   }
@@ -69,4 +70,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(withAuth(App));
