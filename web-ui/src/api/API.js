@@ -11,9 +11,7 @@ const httpClient = axios.create({
 });
 
 httpClient.interceptors.request.use(function (config) {
-  const token = localStorage.getItem(
-    `msal.${process.env.REACT_APP_AZURE_CLIENT}.idtoken`
-  );
+  const token = sessionStorage.getItem('msal.idtoken');
   config.headers.Authorization = token ? `Bearer ${token}` : '';
   return config;
 });
