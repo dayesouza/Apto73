@@ -29,8 +29,8 @@ export function deleteWaterSuccess(water) {
 }
 
 export function saveWater(value) {
-  return function (dispatch) {
-    dispatch(beginApiCall());
+  return async function (dispatch) {
+    await dispatch(beginApiCall());
     return waterService
       .save(value)
       .then((water) => {
@@ -46,8 +46,8 @@ export function saveWater(value) {
 }
 
 export function deleteWater(water) {
-  return function (dispatch) {
-    dispatch(beginApiCall());
+  return async function (dispatch) {
+    await dispatch(beginApiCall());
     return waterService
       .delete(water._id)
       .then((_) => {
@@ -61,8 +61,8 @@ export function deleteWater(water) {
 }
 
 export function loadWater() {
-  return function (dispatch) {
-    dispatch(beginApiCall());
+  return async function (dispatch) {
+    await dispatch(beginApiCall());
     return waterService
       .get()
       .then((waterList) => {

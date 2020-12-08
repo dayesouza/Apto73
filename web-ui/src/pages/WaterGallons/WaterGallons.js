@@ -98,17 +98,14 @@ class WaterGallons extends Component {
         <div className="d-flex justify-content-between">
           <h3>History</h3>
           <div>
-            {this.props.loading ? (
-              <Col>
-                <Spinner />
-              </Col>
-            ) : (
+            {!this.props.loading && (
               <Link to="water-gallons/add">
                 <AddButton />
               </Link>
             )}
           </div>
         </div>
+        {this.props.loading && <Spinner />}
         <List deleteWater={this.delete} waterList={this.props.waterList} />
       </div>
     );

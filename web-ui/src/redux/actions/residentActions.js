@@ -17,8 +17,8 @@ export function createResidentSuccess(resident) {
 }
 
 export function saveResident(value) {
-  return function (dispatch) {
-    dispatch(beginApiCall());
+  return async function (dispatch) {
+    await dispatch(beginApiCall());
     return residentsService
       .save(value)
       .then((resident) => {
@@ -35,8 +35,8 @@ export function saveResident(value) {
 }
 
 export function loadResidents() {
-  return function (dispatch) {
-    dispatch(beginApiCall());
+  return async function (dispatch) {
+    await dispatch(beginApiCall());
     return residentsService
       .get()
       .then((residents) => {

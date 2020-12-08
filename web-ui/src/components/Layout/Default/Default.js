@@ -11,11 +11,17 @@ import { connect } from 'react-redux';
 import * as menuVisibleActions from '../../../redux/actions/menuVisibleActions';
 import * as userActions from '../../../redux/actions/userActions';
 
-const DefaultLayout = ({ children, menuVisible, toggleMenu, auth, saveAuthenticatedUser}) => {
-  
+const DefaultLayout = ({
+  children,
+  menuVisible,
+  toggleMenu,
+  auth,
+  saveAuthenticatedUser,
+  user,
+}) => {
   useEffect(() => {
     // eslint-disable-next-line react/prop-types
-    if (auth) saveAuthenticatedUser(auth.user);
+    if (user !== auth.user) saveAuthenticatedUser(auth.user);
   }, [auth]);
 
   const shouldCloseMenu = () => {
@@ -35,7 +41,7 @@ const DefaultLayout = ({ children, menuVisible, toggleMenu, auth, saveAuthentica
           tag="main"
         >
           <MainNavbar />
-          <Container fluid className="my-2">
+          <Container fluid className="my-4">
             {children}
           </Container>
           <Footer />
@@ -50,7 +56,7 @@ function mapStateToProps(state) {
 
   return {
     menuVisible,
-    user
+    user,
   };
 }
 
@@ -65,12 +71,14 @@ DefaultLayout.propTypes = {
   menuVisible: PropTypes.bool.isRequired,
   toggleMenu: PropTypes.func.isRequired,
   saveAuthenticatedUser: PropTypes.func.isRequired,
-    // eslint-disable-next-line react/forbid-prop-types
+  // eslint-disable-next-line react/forbid-prop-types
   auth: PropTypes.object,
+  user: PropTypes.object,
 };
 
 DefaultLayout.defaultProps = {
-  auth: {}
-}
+  auth: {},
+  user: {},
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(DefaultLayout);
