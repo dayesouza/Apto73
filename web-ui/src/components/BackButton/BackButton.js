@@ -11,7 +11,7 @@ function BackButton() {
         type="button"
         aria-label="Toggle Menu"
         onClick={() => history.goBack()}
-        className="nav-link btn btn-link nav-link-icon d-sm-inline d-md-inline d-lg-none"
+        className="nav-link btn btn-link nav-link-icon d-sm-inline d-md-none d-lg-none"
       >
         <FontAwesomeIcon icon="chevron-left" />
       </button>

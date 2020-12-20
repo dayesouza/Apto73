@@ -92,7 +92,7 @@ class WaterGallons extends Component {
             <InfoCard title="Next to buy" value={this.nextOne()} />
           </Col>
           <Col className="mb-3">
-            <InfoCard title="Total spend" value={this.totalValue()} />
+            <InfoCard title="Total spent" value={this.totalValue()} />
           </Col>
         </Row>
         <div className="d-flex justify-content-between">

@@ -55,7 +55,7 @@ export default function FormWater({ save, water, residents }) {
         )}
         <label htmlFor="date">Date</label>
 
-        {!water._id && (
+        {!water._id && !showDateField && (
           <ButtonOptions
             change={changeDate}
             value={watchDateValue}

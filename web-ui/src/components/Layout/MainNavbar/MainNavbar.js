@@ -18,7 +18,7 @@ function MainNavbar() {
         <Navbar className="flex-md-nowrap">
           {hasBackButton() ? <BackButton /> : <NavbarToggle icon="bars" />}
           <div className="w-100 d-none p-1 d-md-flex d-lg-flex">
-            <span className="mainNavbar__appName mx-3">Apto 73</span>
+            <span className="mainNavbar__appName">Apto 73</span>
           </div>
         </Navbar>
       </Container>
