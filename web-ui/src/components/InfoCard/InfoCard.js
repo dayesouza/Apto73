@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Card, CardBody } from 'shards-react';
 import './InfoCard.scss';
 
-export default function InfoCard({ title, value }) {
+function InfoCard({ title, value }) {
   return (
     <Card className="infoCard">
       <CardBody>
@@ -20,3 +20,5 @@ InfoCard.propTypes = {
   title: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
 };
+
+export default InfoCard;

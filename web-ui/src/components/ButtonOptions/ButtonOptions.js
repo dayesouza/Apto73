@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, ButtonGroup } from 'shards-react';
 import PropTypes from 'prop-types';
 
-export default function ButtonOptions({
+function ButtonOptions({
   options,
   value,
   change,
@@ -50,3 +50,5 @@ ButtonOptions.defaultProps = {
   lockOnLastButton: false,
   defaultValueProp: 'value',
 };
+
+export default ButtonOptions;

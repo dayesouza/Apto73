@@ -6,7 +6,6 @@ export default function Footer() {
   return (
     <div className="mt-auto footer p-2 text-center">
       <span>
-        {/* eslint-disable-next-line */}
         {year} - Dayenne Souza
         <a
           aria-label="My Github"

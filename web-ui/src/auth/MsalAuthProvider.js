@@ -6,10 +6,9 @@ export const msalAuth = new UserAgentApplication({
     authority: `https://login.microsoftonline.com/${process.env.REACT_APP_AZURE_TENANT}`,
     clientId: process.env.REACT_APP_AZURE_CLIENT,
     redirectUri: process.env.REACT_APP_CURRENT_URI,
-    postLogoutRedirectUri:process.env.REACT_APP_CURRENT_URI,
+    postLogoutRedirectUri: process.env.REACT_APP_CURRENT_URI,
   },
 });
-
 
 export function withAuth(AppComponent) {
   return class extends Component {
@@ -28,23 +27,27 @@ export function withAuth(AppComponent) {
 
     // eslint-disable-next-line react/no-deprecated
     async componentDidMount() {
-      msalAuth.handleRedirectCallback(() => {
-        const userAccount = msalAuth.getAccount();
+      msalAuth.handleRedirectCallback(
+        () => {
+          const userAccount = msalAuth.getAccount();
 
-        this.setState({
-          isAuthenticated: true,
-          // eslint-disable-next-line react/no-unused-state
-          user: userAccount,
-        });
-      }, (authErr) => { // on fail
-        // eslint-disable-next-line no-console
-        console.log(authErr);
+          this.setState({
+            isAuthenticated: true,
+            // eslint-disable-next-line react/no-unused-state
+            user: userAccount,
+          });
+        },
+        (authErr) => {
+          // on fail
+          // eslint-disable-next-line no-console
+          console.log(authErr);
 
-        this.setState({
-          hasError: true,
-          errorMessage: authErr.errorMessage,
-        });
-      });
+          this.setState({
+            hasError: true,
+            errorMessage: authErr.errorMessage,
+          });
+        }
+      );
 
       if (msalAuth.isCallback(window.location.hash)) {
         this.setState({

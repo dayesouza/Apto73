@@ -8,13 +8,7 @@ import {
 } from 'shards-react';
 import PropTypes from 'prop-types';
 
-export default function ModalConfirm({
-  open,
-  toggle,
-  confirm,
-  message,
-  isDelete,
-}) {
+function ModalConfirm({ open, toggle, confirm, message, isDelete }) {
   return (
     <Modal open={open} toggle={toggle}>
       <ModalHeader>{message}</ModalHeader>
@@ -43,3 +37,5 @@ ModalConfirm.defaultProps = {
   message: 'Are you sure you want to delete this item?',
   isDelete: true,
 };
+
+export default ModalConfirm;

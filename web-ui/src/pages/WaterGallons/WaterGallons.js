@@ -7,10 +7,9 @@ import * as waterActions from '../../redux/actions/waterActions';
 import * as residentActions from '../../redux/actions/residentActions';
 import List from './List/List';
 import { Col, Row } from 'shards-react';
-import { Link } from 'react-router-dom';
 import Spinner from '../../components/Spinner/Spinner';
 import Toastr from '../../helpers/Toastr/Toastr';
-import AddButton from '../../components/AddButton/AddButton';
+import LinkButton from '../../components/LinkButton/LinkButton';
 import InfoCard from '../../components/InfoCard/InfoCard';
 
 class WaterGallons extends Component {
@@ -99,9 +98,7 @@ class WaterGallons extends Component {
           <h3>History</h3>
           <div>
             {!this.props.loading && (
-              <Link to="water-gallons/add">
-                <AddButton />
-              </Link>
+              <LinkButton name="Add" icon="plus" link="water-gallons/add" />
             )}
           </div>
         </div>

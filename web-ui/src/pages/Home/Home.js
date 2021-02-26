@@ -1,5 +1,12 @@
 import React from 'react';
-import { Row, Col } from 'shards-react';
+import {
+  Row,
+  Col,
+  Card,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+} from 'shards-react';
 import SmallStats from '../../components/SmallStats/SmallStats';
 
 export default function Home() {
@@ -37,6 +44,17 @@ export default function Home() {
             />
           </Col>
         ))}
+      </Row>
+      <Row>
+        <Col>
+          <h3>Actions</h3>
+          <Card>
+            <CardBody>
+              <CardTitle>Add new</CardTitle>
+              <CardSubtitle>Card subtitle</CardSubtitle>
+            </CardBody>
+          </Card>
+        </Col>
       </Row>
     </>
   );

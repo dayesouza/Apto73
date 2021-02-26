@@ -100,11 +100,13 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-const mapDispatchToProps = {
-  saveWater: waterActions.saveWater,
-  deleteWater: waterActions.deleteWater,
-  loadWaterList: waterActions.loadWater,
-  loadResidents: residentsActions.loadResidents,
+const mapDispatchToProps = (dispatch) => {
+  return {
+    saveWater: (water) => waterActions.saveWater(water)(dispatch),
+    deleteWater: () => waterActions.deleteWater()(dispatch),
+    loadWaterList: () => waterActions.loadWater()(dispatch),
+    loadResidents: () => residentsActions.loadResidents()(dispatch),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Add);

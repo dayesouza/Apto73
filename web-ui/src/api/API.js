@@ -1,5 +1,5 @@
-/*eslint-disable */
 import axios from 'axios';
+import { msalAuth } from '../auth/MsalAuthProvider';
 
 const httpClient = axios.create({
   baseURL: `${process.env.REACT_APP_API_URL}/api`,
@@ -10,8 +10,15 @@ const httpClient = axios.create({
   },
 });
 
-httpClient.interceptors.request.use(function (config) {
-  const token = sessionStorage.getItem('msal.idtoken');
+httpClient.interceptors.request.use(async (config) => {
+  let token;
+  const accessTokenRequest = {
+    scopes: [process.env.REACT_APP_AUTH_SCOPE],
+  };
+  await msalAuth.acquireTokenSilent(accessTokenRequest).then((res) => {
+    token = res.accessToken;
+  });
+
   config.headers.Authorization = token ? `Bearer ${token}` : '';
   return config;
 });

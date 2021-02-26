@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as residentActions from '../../redux/actions/residentActions';
 
-import AddButton from '../../components/AddButton/AddButton';
+import LinkButton from '../../components/LinkButton/LinkButton';
 import PropTypes from 'prop-types';
 import List from './List/List';
 
@@ -37,9 +36,7 @@ class Residents extends Component {
     return (
       <>
         <h1>Residents</h1>
-        <Link to="residents/add">
-          <AddButton />
-        </Link>
+        <LinkButton name="Add" icon="plus" link="residents/add" />
 
         <List residents={this.props.residents} />
       </>

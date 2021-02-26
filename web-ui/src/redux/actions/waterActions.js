@@ -29,7 +29,7 @@ export function deleteWaterSuccess(water) {
 }
 
 export function saveWater(value) {
-  return async function (dispatch) {
+  return async (dispatch) => {
     await dispatch(beginApiCall());
     return waterService
       .save(value)
