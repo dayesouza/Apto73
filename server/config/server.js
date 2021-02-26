@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const helmet = require("helmet");
 const passport = require('passport');
-const config = require('./auth-config');
+const authConfig = require('./auth-config');
 const cors = require('cors');
 
 const server = express();
@@ -14,8 +14,7 @@ server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 server.use(helmet());
 
-const bearerStrategy = new BearerStrategy(config, (token, done) => {
-  // Send user info using the second argument
+const bearerStrategy = new BearerStrategy(authConfig, (token, done) => {
   done(null, {}, token);
 });
 
