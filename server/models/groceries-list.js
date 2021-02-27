@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const groceriesListSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -8,4 +8,4 @@ const groceriesListSchema = new mongoose.Schema({
   marketDate: { type: Date },
 });
 
-module.exports = mongoose.model("groceriesList", groceriesListSchema);
+module.exports = mongoose.model('groceriesList', groceriesListSchema);

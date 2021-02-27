@@ -11,6 +11,7 @@ import Spinner from '../../components/Spinner/Spinner';
 import Toastr from '../../helpers/Toastr/Toastr';
 import LinkButton from '../../components/LinkButton/LinkButton';
 import InfoCard from '../../components/InfoCard/InfoCard';
+import PageHeader from '../../components/PageHeader/PageHeader';
 
 class WaterGallons extends Component {
   constructor(props) {
@@ -25,12 +26,11 @@ class WaterGallons extends Component {
   }
 
   componentDidMount() {
-    const { waterList } = this.props;
+    const { waterList, residents } = this.props;
     if (Object.keys(waterList).length === 0) {
       this.fetchList();
     }
 
-    const { residents } = this.props;
     if (Object.keys(residents).length === 0) {
       this.fetchResidentsList();
     }
@@ -56,8 +56,8 @@ class WaterGallons extends Component {
   };
 
   nextOne = () => {
-    const residents = this.props.residents;
-    const latestUser = this.props.waterList[0]?.user;
+    const { residents, waterList } = this.props;
+    const latestUser = waterList[0]?.user;
     const latestIndex = residents.findIndex((r) => r.name === latestUser);
 
     if (residents.length && latestIndex >= residents.length - 1) {
@@ -84,8 +84,8 @@ class WaterGallons extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Water Gallons</h1>
+      <>
+        <PageHeader header="Water Gallons" />
         <Row>
           <Col className="mb-3">
             <InfoCard title="Next to buy" value={this.nextOne()} />
@@ -96,15 +96,13 @@ class WaterGallons extends Component {
         </Row>
         <div className="d-flex justify-content-between">
           <h3>History</h3>
-          <div>
-            {!this.props.loading && (
-              <LinkButton name="Add" icon="plus" link="water-gallons/add" />
-            )}
-          </div>
+          {!this.props.loading && (
+            <LinkButton name="Add" icon="plus" link="water-gallons/add" />
+          )}
         </div>
         {this.props.loading && <Spinner />}
         <List deleteWater={this.delete} waterList={this.props.waterList} />
-      </div>
+      </>
     );
   }
 }

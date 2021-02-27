@@ -1,4 +1,5 @@
-require("dotenv").config();
+require('dotenv').config();
+
 const tenant = process.env.AZURE_TENANT;
 const client = process.env.AZURE_CLIENT_ID;
 
@@ -9,7 +10,7 @@ const config = {
   loggingLevel: 'info',
   passReqToCallback: false,
   loggingNoPII: false,
-  audience: `${client}`
+  audience: `${client}`,
 };
 
 module.exports = config;

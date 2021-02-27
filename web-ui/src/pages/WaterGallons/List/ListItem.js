@@ -12,7 +12,7 @@ export default function ListItem({ water, history, deleteWater }) {
     return moment(date).format('dddd, MMMM Do YYYY');
   }
 
-  function toggleConfirmDelete(e, water) {
+  function toggleConfirmDelete(e) {
     e.stopPropagation();
     setOpenModal(true);
   }
@@ -35,7 +35,7 @@ export default function ListItem({ water, history, deleteWater }) {
       />
       <Card
         onClick={() => history.push(`/water-gallon/${water._id}`)}
-        className="mb-2 waterCard"
+        className="mb-2 water-card"
       >
         <CardBody>
           <CardTitle className="d-flex justify-content-between">
@@ -43,21 +43,16 @@ export default function ListItem({ water, history, deleteWater }) {
             <span>{water.user}</span>
           </CardTitle>
           <div className="d-flex justify-content-between">
-            <span>
-              R$
-              {water.value}
-            </span>
-            <span>
-              <Button
-                onClick={(e) => toggleConfirmDelete(e, water)}
-                size="sm"
-                outline
-                aria-label="Delete entry"
-                theme="danger"
-              >
-                <FontAwesomeIcon icon="trash" />
-              </Button>
-            </span>
+            <span>R$ {' ' + water.value}</span>
+            <Button
+              onClick={(e) => toggleConfirmDelete(e)}
+              size="sm"
+              outline
+              aria-label="Delete entry"
+              theme="danger"
+            >
+              <FontAwesomeIcon icon="trash" />
+            </Button>
           </div>
         </CardBody>
       </Card>

@@ -2,12 +2,13 @@ import React from 'react';
 
 import './List.scss';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import ListItem from './ListItem';
 
-function List({ waterList, history, deleteWater }) {
+function List({ waterList, deleteWater }) {
+  const history = useHistory();
   return (
-    <div>
+    <>
       {waterList.map((water) => {
         return (
           <ListItem
@@ -18,7 +19,7 @@ function List({ waterList, history, deleteWater }) {
           />
         );
       })}
-    </div>
+    </>
   );
 }
 
@@ -27,4 +28,4 @@ List.propTypes = {
   deleteWater: PropTypes.func.isRequired,
 };
 
-export default withRouter(List);
+export default List;
