@@ -6,6 +6,7 @@ module.exports = (app) => {
 
   router.get('/', resident.findAll);
   router.get('/:id', resident.getById);
+  router.post('/:id', resident.post);
   router.delete('/:id', resident.delete);
 
   app.use('/api/residents', router);
