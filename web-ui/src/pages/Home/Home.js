@@ -48,12 +48,12 @@ export default function Home() {
       <Row>
         <Col>
           <h3>Actions</h3>
-          <Card>
+          {/* <Card>
             <CardBody>
               <CardTitle>Add new</CardTitle>
               <CardSubtitle>Card subtitle</CardSubtitle>
             </CardBody>
-          </Card>
+          </Card> */}
         </Col>
       </Row>
     </>
