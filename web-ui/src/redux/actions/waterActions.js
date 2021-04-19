@@ -29,19 +29,19 @@ export function deleteWaterSuccess(water) {
 }
 
 export function saveWater(value) {
-  return async (dispatch) => {
-    await dispatch(beginApiCall());
-    return waterService
-      .save(value)
-      .then((water) => {
-        value._id
-          ? dispatch(updateWaterSuccess(water))
-          : dispatch(createWaterSuccess(water));
-      })
-      .catch((error) => {
+  return async function save(dispatch) {
+    dispatch(beginApiCall());
+    try {
+      const water = await waterService
+      .save(value);
+      value._id
+      ? dispatch(updateWaterSuccess(water))
+      : dispatch(createWaterSuccess(water));
+      }
+      catch (error) {
         dispatch(apiCallError(error));
         throw error;
-      });
+      };
   };
 }
 
@@ -61,16 +61,15 @@ export function deleteWater(water) {
 }
 
 export function loadWater() {
-  return async function (dispatch) {
-    await dispatch(beginApiCall());
-    return waterService
-      .get()
-      .then((waterList) => {
-        dispatch(loadWaterSuccess(waterList));
-      })
-      .catch((error) => {
-        dispatch(apiCallError(error));
-        throw error;
-      });
+  return async function get(dispatch) {
+    dispatch(beginApiCall());
+    try {
+      const water = await waterService.get();
+      dispatch(loadWaterSuccess(water));
+    }
+    catch(error) {
+      dispatch(apiCallError(error));
+      throw error;
+    };
   };
 }

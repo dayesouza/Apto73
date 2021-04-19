@@ -116,11 +116,12 @@ WaterGallons.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    waterList: state.waterList.sort((a, b) => {
-      if (a.date < b.date) return 1;
-      if (a.date > b.date) return -1;
-      return 0;
-    }),
+    waterList: state.waterList,
+    // .sort((a, b) => {
+    //   if (a.date < b.date) return 1;
+    //   if (a.date > b.date) return -1;
+    //   return 0;
+    // }),
     loading: state.apiCallsInProgress > 0,
     residents: state.residents,
   };

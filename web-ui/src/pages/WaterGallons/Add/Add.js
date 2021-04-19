@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Alert } from 'shards-react';
@@ -7,7 +6,7 @@ import * as waterActions from '../../../redux/actions/waterActions';
 import * as residentsActions from '../../../redux/actions/residentActions';
 import Form from './Form';
 import Toastr from '../../../helpers/Toastr/Toastr';
-
+import { bindActionCreators } from 'redux';
 function Add({
   waterList,
   loadWaterList,
@@ -43,7 +42,7 @@ function Add({
     }
   };
 
-  function save(values) {
+  const save = (values) => {
     values.date = new Date(values.date);
     saveWater(values)
       .then((_) => {
@@ -100,13 +99,10 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    saveWater: (water) => waterActions.saveWater(water)(dispatch),
-    deleteWater: () => waterActions.deleteWater()(dispatch),
-    loadWaterList: () => waterActions.loadWater()(dispatch),
-    loadResidents: () => residentsActions.loadResidents()(dispatch),
-  };
+const mapDispatchToProps = {
+  loadWaterList: waterActions.loadWater,
+  saveWater: waterActions.saveWater,
+  loadResidents: residentsActions.loadResidents,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Add);

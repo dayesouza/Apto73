@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 /* eslint-disable import/no-extraneous-dependencies */
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
-import thunk from 'redux-thunk';
+import ReduxThunk from 'redux-thunk';
 import rootReducer from './reducers';
 
 export default function configureStore(initialState) {
@@ -11,6 +11,6 @@ export default function configureStore(initialState) {
   return createStore(
     rootReducer,
     initialState,
-    composeEnhancers(applyMiddleware(thunk, reduxImmutableStateInvariant()))
+    composeEnhancers(applyMiddleware(ReduxThunk, reduxImmutableStateInvariant()))
   );
 }

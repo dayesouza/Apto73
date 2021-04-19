@@ -7,7 +7,7 @@ export default function waterReducer(state = initialState.waterList, action) {
     case types.LOAD_WATER_SUCCESS:
       return action.waterList;
     case types.CREATE_WATER_SUCCESS:
-      return [...state, { ...action.water }];
+      return [...state, action.water];
     case types.UPDATE_WATER_SUCCESS:
       return state.map((water) =>
         water._id === action.water._id ? action.water : water
