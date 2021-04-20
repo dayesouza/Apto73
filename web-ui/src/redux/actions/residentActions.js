@@ -9,6 +9,13 @@ export function loadResidentsSuccess(residents) {
   };
 }
 
+export function updateResidentSuccess(resident) {
+  return {
+    type: types.UPDATE_RESIDENT_SUCCESS,
+    resident,
+  };
+}
+
 export function createResidentSuccess(resident) {
   return {
     type: types.CREATE_RESIDENT_SUCCESS,
@@ -18,14 +25,13 @@ export function createResidentSuccess(resident) {
 
 export function saveResident(value) {
   return async function (dispatch) {
-    await dispatch(beginApiCall());
-    return residentsService
+    dispatch(beginApiCall());
+    return await residentsService
       .save(value)
       .then((resident) => {
-        // value._id
-        // ? dispatch(updateWaterSuccess(water))
-        // :
-        dispatch(createResidentSuccess(resident));
+        value._id
+          ? dispatch(updateResidentSuccess(resident))
+          : dispatch(createResidentSuccess(resident));
       })
       .catch((error) => {
         dispatch(apiCallError(error));
@@ -36,8 +42,8 @@ export function saveResident(value) {
 
 export function loadResidents() {
   return async function (dispatch) {
-    await dispatch(beginApiCall());
-    return residentsService
+    dispatch(beginApiCall());
+    return await residentsService
       .get()
       .then((residents) => {
         dispatch(loadResidentsSuccess(residents));

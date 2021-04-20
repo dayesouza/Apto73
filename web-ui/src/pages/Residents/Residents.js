@@ -1,75 +1,38 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as residentActions from '../../redux/actions/residentActions';
 
 import LinkButton from '../../components/LinkButton/LinkButton';
-import PropTypes from 'prop-types';
 import List from './List/List';
 
-class Residents extends Component {
-  constructor(props) {
-    super(props);
+function Residents() {
+  const [error, setError] = useState(null);
+  const residents = useSelector((state) => state.residents);
+  const loading = useSelector((state) => state.apiCallsInProgress > 0);
 
-    this.state = {
-      error: null,
-      refreshing: false,
-      residents: 0,
-    };
-  }
+  const dispatch = useDispatch();
 
-  componentDidMount() {
-    const { residents } = this.props;
-    if (Object.keys(residents).length === 0) {
-      this.fetchList();
+  useEffect(() => {
+    if (!residents.length) {
+      fetchList();
     }
-  }
+  }, []);
 
-  fetchList = () => {
-    return this.props.actions.loadResidents().catch((_) => {
-      this.setState({ error: 'Undefined error' });
+  const fetchList = () => {
+    dispatch(residentActions.loadResidents()).catch((_) => {
+      setError({ error: 'Undefined error' });
     });
   };
 
-  render() {
-    return (
-      <>
-        <h1>Residents</h1>
-        <LinkButton name="Add" icon="plus" link="residents/add" />
+  return (
+    <>
+      <h1>Residents</h1>
+      <LinkButton name="Add" icon="plus" link="residents/add" />
 
-        <List residents={this.props.residents} />
-      </>
-    );
-  }
+      <List residents={residents} />
+    </>
+  );
 }
 
-Residents.propTypes = {
-  residents: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired,
-};
-
-function mapStateToProps(state) {
-  return {
-    residents: state.residents.sort((a, b) => {
-      if (a.name < b.name) return 1;
-      if (a.name > b.name) return -1;
-      return 0;
-    }),
-    loading: state.apiCallsInProgress > 0,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: {
-      loadResidents: bindActionCreators(
-        residentActions.loadResidents,
-        dispatch
-      ),
-    },
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Residents);
+export default Residents;
