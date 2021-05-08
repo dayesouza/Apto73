@@ -7,9 +7,11 @@ import ListItem from './ListItem';
 
 function List({ waterList, deleteWater }) {
   const history = useHistory();
+  const list = waterList.sort((a, b) => new Date(b.date) - new Date(a.date));
+
   return (
     <>
-      {waterList.map((water) => {
+      {list.map((water) => {
         return (
           <ListItem
             key={water._id}

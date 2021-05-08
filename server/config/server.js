@@ -9,9 +9,9 @@ const cors = require('cors');
 const authConfig = require('./auth-config');
 
 const server = express();
-if (process.env.NODE_ENV.toLocaleLowerCase() !== 'local') {
+// if (process.env.NODE_ENV.toLocaleLowerCase() !== 'local') {
   appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY).start();
-}
+// }
 server.use(cors({ credentials: true, origin: true }));
 
 server.use(bodyParser.urlencoded({ extended: true }));
